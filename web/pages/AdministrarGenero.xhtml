@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layout.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="msg" showDetail="true" life="3000"/>
+                <p:panel id="pnl_adminGenero" header="Administrar G&eacute;nero" styleClass="container">
+                    <h:form id="formBtnNew">
+                        <p:commandButton id="btnNew" update=":formNew" oncomplete="PF('dlgNew').show();" icon="fa fa-file" title="Nuevo"
+                                         value="Nuevo" actionListener="#{generoManagedBean.limpiar()}"/>                  
+                    </h:form>
+
+                    <h:form id="formDataTable" >
+                        <p:dataTable id="lista" value="#{generoManagedBean.listaGenero}" var="generoItem"
+                                     paginator="true" rows="10" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,15,20">
+                            <f:facet name="header">
+                                G&eacute;neros
+                            </f:facet>
+                            
+                            <p:column headerText="Nº" width="60">
+                                <h:outputText value="#{generoItem.idgenero}" />
+                            </p:column>
+                            <p:column headerText="Familia">
+                                <h:outputText value="#{generoItem.familia.denominacion}" style="font-style: oblique"/>
+                            </p:column>
+                            <p:column headerText="G&eacute;nero">
+                                <h:outputText value="#{generoItem.denominacion}" style="font-style: oblique"/>
+                            </p:column>
+                            <p:column headerText="Abreviatura">
+                                <h:outputText value="#{generoItem.abreviatura}" />
+                            </p:column>
+                            <p:column style="width:10%;text-align: center">
+                                <h:outputLink value="/Herbarium/hb/pages/AdministrarEspecie.xhtml">
+                                    <h:outputText value="Especie"/>
+                                </h:outputLink>                         
+                            </p:column>
+                            <p:column style="width:6%;text-align: center">
+                                <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="fa fa-edit" title="Editar">
+                                    <f:setPropertyActionListener value="#{generoItem}" target="#{generoManagedBean.genero}" />
+                                </p:commandButton>                            
+                            </p:column>
+                            <p:column style="width:6%;text-align: center">
+                                <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" immediate="True"
+                                                 icon="fa fa-trash" title="Eliminar">
+                                    <f:setPropertyActionListener value="#{generoItem}" target="#{generoManagedBean.genero}" />          
+                                </p:commandButton>                                                        
+
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                    <h:form id="formNew">
+                        <p:dialog header="Registrar G&eacute;nero" widgetVar="dlgNew" id="dlgNew" modal="true"
+                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridNew" columns="2" cellpadding="3">
+
+                                <h:outputLabel for="cbx_familia" value="Familia:" />
+                                <p:selectOneMenu id="cbx_familia" value="#{generoManagedBean.genero.familia.idfamilia}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{familiaManagedBean.selectOneItemsFamilia}" />
+                                </p:selectOneMenu>
+                                <h:outputLabel for="txt_denominacion" value="Denominaci&oacute;n:" />                            
+                                <p:inputText id="txt_denominacion" label="Denominaci&oacute;n" placeholder="DENOMINACI&Oacute;N"
+                                             value="#{generoManagedBean.genero.denominacion}" size="60"/>
+
+                                <h:outputLabel for="txt_abreviatura" value="Abreviatura:" />                            
+                                <p:inputText id="txt_abreviatura" label="Abreviatura" placeholder="ABREVIATURA"
+                                                 value="#{generoManagedBean.genero.abreviatura}"/>
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnRegistrar" update=":formDataTable, :msg"
+                                                     oncomplete="PF('dlgNew').hide()" icon="fa fa-save text-success" 
+                                                     value="Guardar" title="Guardar" actionListener="#{generoManagedBean.registrarGenero}"/>
+                                    <p:commandButton id="btnCancelarRegistro"  oncomplete="PF('dlgNew').hide()" immediate="true"
+                                                     icon="fa fa-remove text-danger" value="Cancelar" title="Cancelar"/>
+                                </f:facet>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formEdit">
+                        <p:dialog header="Actualizar datos" widgetVar="dlgEdit" id="dlgEdit"  
+                                  modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+
+                            <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">
+                                <h:outputLabel/>
+                                <h:inputHidden value="#{generoManagedBean.genero.idgenero}" />
+                                <h:outputLabel for="cbx_edit_familia" value="Familia" />
+                                <p:selectOneMenu id="cbx_edit_familia" value="#{generoManagedBean.genero.familia.idfamilia}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" itemDisabled="true"/>
+                                    <f:selectItems value="#{familiaManagedBean.selectOneItemsFamilia}" />
+                                </p:selectOneMenu>
+                                <h:outputLabel for="txt_edit_denominacion" value="Denominación:" />                            
+                                <p:inputText id="txt_edit_denominacion" required="true" label="Denaminación" placeholder="DENOMINACIÓN"
+                                             value="#{generoManagedBean.genero.denominacion}" size="60"/>
+
+                                <h:outputLabel for="txt_edit_abreviatura" value="Abreviatura:" />                            
+                                <p:inputText id="txt_edit_abreviatura" label="Abreviatura" placeholder="ABREVIATURA"
+                                                 value="#{generoManagedBean.genero.abreviatura}"/>                                
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
+                                                     oncomplete="PF('dlgEdit').hide()" icon="fa fa-save text-success" 
+                                                     title="Guardar" value="Guardar" actionListener="#{generoManagedBean.actualizarGenero}"/>
+                                    <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide()" immediate="true"
+                                                     icon="fa fa-remove text-danger" title="Cancelar" value="Cancelar" />
+                                </f:facet>
+
+                            </h:panelGrid>
+
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formDelete">
+                        <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
+                                         header="Eliminar Registro" showEffect="fade" 
+                                         hideEffect="explode" widgetVar="dlgDelete">
+                            <h:inputHidden value="#{generoManagedBean.genero.idgenero}" />
+                            <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
+                                             icon="fa fa-remove text-success" oncomplete="PF('dlgDelete').hide()" 
+                                             actionListener="#{generoManagedBean.eliminarGenero()}"/>
+
+                            <p:commandButton id="btnCancel" value="Cancelar" styleClass="ui-confirmdialog-no" 
+                                             icon="fa fa-remove text-danger" oncomplete="PF('dlgDelete').hide()" />
+
+                        </p:confirmDialog>
+                    </h:form>
+                </p:panel>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

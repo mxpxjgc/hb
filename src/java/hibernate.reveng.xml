@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="herbario"/>
+  <table-filter match-name="distrito"/>
+  <table-filter match-name="genero"/>
+  <table-filter match-name="usuario_rol"/>
+  <table-filter match-name="imagen"/>
+  <table-filter match-name="colecta_persona"/>
+  <table-filter match-name="departamento"/>
+  <table-filter match-name="casillero"/>
+  <table-filter match-name="ejemplar"/>
+  <table-filter match-name="habito"/>
+  <table-filter match-name="provincia"/>
+  <table-filter match-name="fotografia"/>
+  <table-filter match-name="gabinete"/>
+  <table-filter match-name="usuario"/>
+  <table-filter match-name="especie"/>
+  <table-filter match-name="colecta"/>
+  <table-filter match-name="persona"/>
+  <table-filter match-name="rol"/>
+  <table-filter match-name="formacion"/>
+  <table-filter match-name="familia"/>
+</hibernate-reverse-engineering>

@@ -1,0 +1,132 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+        <ui:composition template="./../template/layout.xhtml">
+            <ui:define name="content">
+                <p:growl id="msg" showDetail="true" life="3000"/>
+                <p:panel id="pnl_adminCasillero" header="Administrar Casillero" styleClass="container">
+                    <h:form id="formBtnNew">
+                        <p:commandButton id="btnNew" update=":formNew" oncomplete="PF('dlgNew').show();" icon="fa fa-file" title="Nuevo"
+                                         value="Nuevo" actionListener="#{casilleroMBean.limpiar}"/>                  
+                    </h:form>
+
+                    <h:form id="formDataTable" >
+                        <p:dataTable id="lista" value="#{casilleroMBean.listaCasilleros}" var="casilleroItem"
+                                     paginator="true" rows="10" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,15,20">
+                            <f:facet name="header">
+                                Casilleros
+                            </f:facet>
+                            
+                            <p:column headerText="Nº" width="60">
+                                <h:outputText value="#{casilleroItem.idcasillero}" />
+                            </p:column>
+                            <p:column headerText="Gabinete">
+                                <h:outputText value="#{casilleroItem.gabinete.codigo}"/>
+                            </p:column>
+                            <p:column headerText="Casillero">
+                                <h:outputText value="#{casilleroItem.numero}" />
+                            </p:column>
+                            <p:column headerText="Descripción">
+                                <h:outputText value="#{casilleroItem.descripcion}" />
+                            </p:column>                            
+                            <p:column style="width:6%;text-align: center">
+                                <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="fa fa-edit" title="Editar">
+                                    <f:setPropertyActionListener value="#{casilleroItem}" target="#{casilleroMBean.casillero}" />
+                                </p:commandButton>                            
+                            </p:column>
+                            <p:column style="width:6%;text-align: center">
+                                <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" immediate="True"
+                                                 icon="fa fa-trash" title="Eliminar">
+                                    <f:setPropertyActionListener value="#{casilleroItem}" target="#{casilleroMBean.casillero}" />          
+                                </p:commandButton>                                                        
+
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                    <h:form id="formNew">
+                        <p:dialog header="Registrar Casillero" widgetVar="dlgNew" id="dlgNew" modal="true"
+                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridNew" columns="2" cellpadding="3">
+
+                                <h:outputLabel for="cbx_gabinete" value="Gabinete" />
+                                <p:selectOneMenu id="cbx_gabinete" value="#{casilleroMBean.casillero.gabinete.idgabinete}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{gabineteManagedBean.selectOneItemsGabinete}" />
+                                </p:selectOneMenu>
+                                <h:outputLabel for="txt_numero" value="Número: " />                            
+                                <p:inputText id="txt_numero" label="Número" placeholder="NÚMERO"
+                                             value="#{casilleroMBean.casillero.numero}" size="60"/>
+                                <h:outputLabel for="txt_descripción" value="Descripción: " />                            
+                                <p:inputText id="txt_descripción" label="Descripción" placeholder="DESCRIPCIÓN"
+                                             value="#{casilleroMBean.casillero.descripcion}" size="60"/>                                
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnRegistrar" update=":formDataTable, :msg"
+                                                     oncomplete="PF('dlgNew').hide()" icon="fa fa-save text-success" 
+                                                     value="Guardar" title="Guardar" actionListener="#{casilleroMBean.registrarCasillero}"/>
+                                    <p:commandButton id="btnCancelarRegistro"  oncomplete="PF('dlgNew').hide()" immediate="true"
+                                                     icon="fa fa-remove text-danger" value="Cancelar" title="Cancelar"/>
+                                </f:facet>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formEdit">
+                        <p:dialog header="Actualizar datos" widgetVar="dlgEdit" id="dlgEdit"  
+                                  modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">                                
+                                <h:outputLabel/>
+                                <h:inputHidden value="#{casilleroMBean.casillero.idcasillero}" />                                
+                                <h:outputLabel for="cbx_edit_gabinete" value="Gabinete: " />
+                                <p:selectOneMenu id="cbx_edit_gabinete" value="#{casilleroMBean.casillero.gabinete.idgabinete}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{gabineteManagedBean.selectOneItemsGabinete}" />
+                                </p:selectOneMenu>
+                                <h:outputLabel for="txt_edit_numero" value="Número: " />                            
+                                <p:inputText id="txt_edit_numero" required="true" label="Número" placeholder="NÚMERO"
+                                             value="#{casilleroMBean.casillero.numero}" size="60"/>                                
+                                <h:outputLabel for="txt_edit_descripcion" value="Descrpción: " />                            
+                                <p:inputText id="txt_edit_descripcion" required="true" label="Descrpción" placeholder="DESCRIPCIÓN"
+                                             value="#{casilleroMBean.casillero.descripcion}" size="60"/>                                
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
+                                                     oncomplete="PF('dlgEdit').hide()" icon="fa fa-save text-success" 
+                                                     title="Guardar" value="Guardar" actionListener="#{casilleroMBean.actualizarCasillero}"/>
+                                    <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide()" immediate="true"
+                                                     icon="fa fa-remove text-danger" title="Cancelar" value="Cancelar" />
+                                </f:facet>
+
+                            </h:panelGrid>
+
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formDelete">
+                        <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
+                                         header="Eliminar Registro" showEffect="fade" 
+                                         hideEffect="explode" widgetVar="dlgDelete">
+                            <h:inputHidden value="#{casilleroMBean.casillero.idcasillero}" />
+                            <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
+                                             icon="fa fa-save text-success" oncomplete="PF('dlgDelete').hide()" 
+                                             actionListener="#{casilleroMBean.eliminarCasillero}"/>
+
+                            <p:commandButton id="btnCancel" value="Cancelar" styleClass="ui-confirmdialog-no" 
+                                             icon="fa fa-remove text-danger" oncomplete="PF('dlgDelete').hide()" />
+
+                        </p:confirmDialog>
+                    </h:form>
+                </p:panel>
+            </ui:define>
+        </ui:composition>
+    </body>
+</html>

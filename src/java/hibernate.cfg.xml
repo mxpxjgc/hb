@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+  <session-factory>
+    <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+    <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+    <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/herbario</property>
+    <property name="hibernate.connection.username">userherbarium</property>
+    <property name="hibernate.connection.password">passherbarium</property>
+    <mapping resource="org/jgc/herbarium/be/Especie.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/Fotografia.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/Gabinete.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/Persona.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/Casillero.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/ColectaPersona.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/Imagen.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/Ejemplar.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/Usuario.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/Rol.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/Provincia.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/Genero.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/Habito.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/Familia.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/UsuarioRol.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/Colecta.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/Distrito.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/Departamento.hbm.xml"/>
+    <mapping resource="org/jgc/herbarium/be/Formacion.hbm.xml"/>
+  </session-factory>
+</hibernate-configuration>

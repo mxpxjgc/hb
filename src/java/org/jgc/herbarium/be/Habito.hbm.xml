@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/10/2016 12:07:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.jgc.herbarium.be.Habito" table="habito" catalog="herbario" optimistic-lock="version">
+        <id name="idhabito" type="java.lang.Long">
+            <column name="idhabito" />
+            <generator class="identity" />
+        </id>
+        <property name="nombrehabito" type="string">
+            <column name="nombrehabito" length="20" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <set name="especies" table="especie" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_habito" />
+            </key>
+            <one-to-many class="org.jgc.herbarium.be.Especie" />
+        </set>
+    </class>
+</hibernate-mapping>

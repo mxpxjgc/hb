@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/10/2016 12:07:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.jgc.herbarium.be.Provincia" table="provincia" catalog="herbario" optimistic-lock="version">
+        <id name="idprovincia" type="java.lang.Long">
+            <column name="idprovincia" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="departamento" class="org.jgc.herbarium.be.Departamento" fetch="select">
+            <column name="id_departamento" not-null="true" />
+        </many-to-one>
+        <property name="codProvincia" type="java.lang.Integer">
+            <column name="cod_provincia" />
+        </property>
+        <property name="denominacion" type="string">
+            <column name="denominacion" length="25" />
+        </property>
+        <set name="distritos" table="distrito" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_provincia" not-null="true" />
+            </key>
+            <one-to-many class="org.jgc.herbarium.be.Distrito" />
+        </set>
+    </class>
+</hibernate-mapping>

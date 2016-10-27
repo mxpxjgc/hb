@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/10/2016 12:07:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.jgc.herbarium.be.Familia" table="familia" catalog="herbario" optimistic-lock="version">
+        <id name="idfamilia" type="java.lang.Long">
+            <column name="idfamilia" />
+            <generator class="identity" />
+        </id>
+        <property name="denominacion" type="string">
+            <column name="denominacion" length="20" />
+        </property>
+        <property name="abreviatura" type="string">
+            <column name="abreviatura" length="10" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <set name="generos" table="genero" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_familia" not-null="true" />
+            </key>
+            <one-to-many class="org.jgc.herbarium.be.Genero" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/10/2016 12:07:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.jgc.herbarium.be.Especie" table="especie" catalog="herbario" optimistic-lock="version">
+        <id name="idespecie" type="java.lang.Long">
+            <column name="idespecie" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="genero" class="org.jgc.herbarium.be.Genero" fetch="select">
+            <column name="id_genero" not-null="true" />
+        </many-to-one>
+        <many-to-one name="habito" class="org.jgc.herbarium.be.Habito" fetch="select">
+            <column name="id_habito" />
+        </many-to-one>
+        <property name="denominacion" type="string">
+            <column name="denominacion" length="50" />
+        </property>
+        <property name="autor" type="string">
+            <column name="autor" length="25" />
+        </property>
+        <property name="nombreVulgar1" type="string">
+            <column name="nombre_vulgar1" length="30" />
+        </property>
+        <property name="nombreVulgar2" type="string">
+            <column name="nombre_vulgar2" length="30" />
+        </property>
+        <property name="nombreVulgar3" type="string">
+            <column name="nombre_vulgar3" length="30" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="500" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <set name="colectas" table="colecta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_especie" not-null="true" />
+            </key>
+            <one-to-many class="org.jgc.herbarium.be.Colecta" />
+        </set>
+    </class>
+</hibernate-mapping>

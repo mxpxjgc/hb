@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/10/2016 12:07:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.jgc.herbarium.be.Persona" table="persona" catalog="herbario" optimistic-lock="version">
+        <id name="idpersona" type="java.lang.Long">
+            <column name="idpersona" />
+            <generator class="identity" />
+        </id>
+        <property name="nombres" type="string">
+            <column name="nombres" length="50" />
+        </property>
+        <property name="apPaterno" type="string">
+            <column name="ap_paterno" length="50" />
+        </property>
+        <property name="apMaterno" type="string">
+            <column name="ap_materno" length="50" />
+        </property>
+        <property name="dni" type="string">
+            <column name="dni" length="10" />
+        </property>
+        <property name="sexo" type="java.lang.Boolean">
+            <column name="sexo" />
+        </property>
+        <property name="telefono" type="string">
+            <column name="telefono" length="10" />
+        </property>
+        <property name="celular1" type="string">
+            <column name="celular1" length="12" />
+        </property>
+        <property name="celular2" type="string">
+            <column name="celular2" length="12" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" length="40" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <set name="usuarios" table="usuario" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_persona" not-null="true" />
+            </key>
+            <one-to-many class="org.jgc.herbarium.be.Usuario" />
+        </set>
+        <set name="fotografias" table="fotografia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_fotografo" />
+            </key>
+            <one-to-many class="org.jgc.herbarium.be.Fotografia" />
+        </set>
+        <set name="colectaPersonas" table="colecta_persona" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_persona" />
+            </key>
+            <one-to-many class="org.jgc.herbarium.be.ColectaPersona" />
+        </set>
+    </class>
+</hibernate-mapping>

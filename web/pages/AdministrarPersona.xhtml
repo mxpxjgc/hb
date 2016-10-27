@@ -1,0 +1,220 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layout.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="msg" showDetail="true" life="3000"/>
+                <p:panel id="panelFamilia" header="ADMINISTRAR PERSONAS" styleClass="container" style="width: 80%">
+                    <h:form id="formBtnNew">
+                        <p:commandButton id="btnNew" 
+                                         icon="fa fa-file"
+                                         value=" Nuevo" 
+                                         title="Registrar Nueva Persona" 
+                                         oncomplete="PF('dlgNew').show();" 
+                                         update=":formNew:dlgNew" 
+                                         actionListener="#{personaManagedBean.limpiar()}"/> 
+                    </h:form>                    
+                    <h:form id="formDataTable">
+                        <p:dataTable id="lista" 
+                                     value="#{personaManagedBean.listaPersona}" 
+                                     var="personaItem"
+                                     paginator="true" 
+                                     rows="10" 
+                                     paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,15,20">
+                            <f:facet name="header">
+                                Personas
+                            </f:facet>
+                            <p:column style="width:4%; text-align: center" headerText="Nº">
+                                <h:outputText value="#{personaItem.idpersona}" />
+                            </p:column>
+                            <p:column headerText="Nombres">
+                                <h:outputText value="#{personaItem.nombres}"/>
+                            </p:column>
+                            <p:column headerText="Apellido Paterno">
+                                <h:outputText value="#{personaItem.apPaterno}"/>
+                            </p:column>
+                            <p:column headerText="Apellido Materno">
+                                <h:outputText value="#{personaItem.apMaterno}"/>
+                            </p:column>
+                            <p:column headerText="DNI">
+                                <h:outputText value="#{personaItem.dni}"/>
+                            </p:column> 
+                            <p:column style="width:6%;text-align: center">
+                                <p:commandButton update=":formDetail" oncomplete="PF('dlgDetail').show()" icon="ui-icon-search" title="Detalle">
+                                    <f:setPropertyActionListener value="#{personaItem}" target="#{personaManagedBean.persona}" />
+                                </p:commandButton>
+                            </p:column>
+
+                            <p:column style="width:6%;text-align: center">
+                                <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" 
+                                                 icon="fa fa-edit" title="Editar">
+                                    <f:setPropertyActionListener value="#{personaItem}" target="#{personaManagedBean.persona}" />
+                                </p:commandButton>                            
+                            </p:column>
+                            <p:column style="width:6%;text-align: center">
+                                <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" 
+                                                 immediate="True" icon="fa fa-trash" title="Eliminar">
+                                    <f:setPropertyActionListener value="#{personaItem}" target="#{personaManagedBean.persona}" />                                    
+                                </p:commandButton>                                
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>                    
+
+                    <h:form id="formNew">
+                        <p:dialog header="Registrar Persona" widgetVar="dlgNew" id="dlgNew" modal="true"
+                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridNew" columns="2" cellpadding="3">
+                                <h:outputLabel for="nombres" value="Código: " />
+                                <p:inputText id="nombres" required="true" label="Nombres"
+                                             value="#{personaManagedBean.persona.nombres}" placeholder="NOMBRES" size="60"/>
+                                <h:outputLabel for="appaterno" value="Apellido Paterno: " />
+                                <p:inputText id="appaterno" required="true" label="Apellido Paterno"
+                                             value="#{personaManagedBean.persona.apPaterno}" placeholder="APELLIDO PATERNO" size="60"/>
+                                <h:outputLabel for="apmaterno" value="Apellido Materno: " />
+                                <p:inputText id="apmaterno" required="true" label="Apellido Materno"
+                                             value="#{personaManagedBean.persona.apMaterno}" placeholder="APELLIDO mATERNO" size="60"/>
+                                <h:outputLabel for="dni" value="DNI: " />
+                                <p:inputText id="dni" required="true" label="DNI"
+                                             value="#{personaManagedBean.persona.dni}" placeholder="DNI" size="40"/>
+                                <h:outputLabel for="sexo" value="Sexo: " />
+                                <p:selectOneRadio id="radioSexo" value="#{personaManagedBean.persona.sexo}">
+                                    <f:selectItem itemLabel="Masculino" itemValue="0" />
+                                    <f:selectItem itemLabel="Femenino" itemValue="1" />
+                                </p:selectOneRadio>
+                                <h:outputLabel for="telefono" value="Teléfono: " />
+                                <p:inputText id="telefono" label="Teléfono "
+                                             value="#{personaManagedBean.persona.telefono}" placeholder="TELÉFONO" size="40"/>
+                                <h:outputLabel for="celular1" value="Celular:  " />
+                                <p:inputText id="celular1" label="Celular 1 "
+                                             value="#{personaManagedBean.persona.celular1}" placeholder="CELULAR 1" size="40"/>
+                                <h:outputLabel for="celular2" value="Celular:  " />
+                                <p:inputText id="celular2" label="Celular 2 "
+                                             value="#{personaManagedBean.persona.celular2}" placeholder="CELULAR 2" size="40"/>
+                                <h:outputLabel for="correo" value="Correo:  " />
+                                <p:inputText id="correo" label="Correo "
+                                             value="#{personaManagedBean.persona.correo}" placeholder="CORREO" size="80"/>
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnRegistrar" icon="fa fa-save text-success" value="Guardar" title="Guardar"  
+                                                     oncomplete="PF('dlgNew').hide()" update=":msg,:formDataTable" actionListener="#{personaManagedBean.registrarPersona}" />
+                                    <p:commandButton id="btnCancelarRegistro"  icon="fa fa-remove text-danger" value="Cancelar" title="Cancelar" oncomplete="PF('dlgNew').hide()" update="formNew" immediate="true"/>
+                                </f:facet>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formEdit">
+                        <p:dialog header="Actualizar datos" widgetVar="dlgEdit" id="dlgEdit"  
+                                  modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">                                                     
+                                <h:outputLabel/>
+                                <h:inputHidden value="#{personaManagedBean.persona.idpersona}" />
+                                <h:outputText value="Nombre: " />
+                                <p:inputText id="txt_edit_nombre" required="true" placeholder="INGRESE NOMBRE" 
+                                             value="#{personaManagedBean.persona.nombres}" size="30"/>
+                                <h:outputText value="Apellido Paterno: " />
+                                <p:inputText id="txt_edit_apPaterno" required="true" placeholder="INGRESE APELLIDO PATERNO" 
+                                             value="#{personaManagedBean.persona.apPaterno}" size="30"/>
+                                <h:outputText value="Apellido Materno: " />
+                                <p:inputText id="txt_edit_apMaterno" required="true" placeholder="INGRESE APELLIDO MATERNO" 
+                                             value="#{personaManagedBean.persona.apMaterno}" size="30"/>
+                                <h:outputText value="DNI: " />
+                                <p:inputText id="txt_edit_dni" required="true" placeholder="INGRESE DNI" 
+                                             value="#{personaManagedBean.persona.dni}" size="10"/>
+                                <h:outputText value="Sexo: " />                                
+                                <p:selectOneRadio id="rd_edit_Sexo" value="#{personaManagedBean.persona.sexo}">
+                                    <f:selectItem itemLabel="Masculino" itemValue="0" />
+                                    <f:selectItem itemLabel="Femenino" itemValue="1" />
+                                </p:selectOneRadio>
+                                <h:outputText value="Teléfono: " />
+                                <p:inputText id="txt_edit_telefono" placeholder="INGRESE TELÉFONO FIJO" 
+                                             value="#{personaManagedBean.persona.telefono}" size="10"/>
+                                <h:outputText value="Celular: " />
+                                <p:inputText id="txt_edit_cel1" placeholder="INGRESE CELULAR" 
+                                             value="#{personaManagedBean.persona.celular1}" size="10"/>
+                                <h:outputText value="Celular: " />
+                                <p:inputText id="txt_edit_cel2" placeholder="INGRESE CELULAR" 
+                                             value="#{personaManagedBean.persona.celular2}" size="10"/>
+                                <h:outputText value="Correo: " />
+                                <p:inputText id="txt_edit_correo" placeholder="INGRESE CORREO ELECTRÓNICO" 
+                                             value="#{personaManagedBean.persona.correo}" size="30"/>                                
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
+                                                     oncomplete="PF('dlgEdit').hide()" icon="fa fa-save text-success" 
+                                                     title="Guardar" value="Guardar" actionListener="#{personaManagedBean.actualizarPersona(actionEvent)}"/>
+                                    <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide()" 
+                                                     icon="fa fa-remove text-danger" title="Cancelar" value="Cancelar" immediate="true"/>
+                                </f:facet>
+
+                            </h:panelGrid>
+
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formDelete">
+                        <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
+                                         header="Eliminar Registro" showEffect="fade" 
+                                         hideEffect="explode" widgetVar="dlgDelete" closable="false">
+                            <h:inputHidden value="#{personaManagedBean.persona.idpersona}" />
+                            <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
+                                             icon="fa fa-save text-success" oncomplete="PF('dlgDelete').hide()" actionListener="#{personaManagedBean.eliminarPersona}"/>
+
+                            <p:commandButton id="btnCancel" value="Cancelar" icon="fa fa-remove text-danger" oncomplete="PF('dlgDelete').hide()" />
+
+                        </p:confirmDialog>
+                    </h:form>
+                    <h:form id="formDetail">
+                        <p:dialog header="Personas" widgetVar="dlgDetail" modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+                            <p:outputPanel id="dlgDetail" style="text-align:center;">
+                                <h:panelGrid  columns="2" cellpadding="3">
+                                    
+                                    <h:outputText value="Id:" />
+                                    <h:outputText value="#{personaManagedBean.persona.idpersona}" />
+
+                                    <h:outputText value="Nombres:" />
+                                    <h:outputText value="#{personaManagedBean.persona.nombres}" />
+
+                                    <h:outputText value="Apellido Paterno:" />
+                                    <h:outputText value="#{personaManagedBean.persona.apPaterno}" />
+
+                                    <h:outputText value="Apellido Materno:" />
+                                    <h:outputText value="#{personaManagedBean.persona.apMaterno}" />
+                                    
+                                    <h:outputText value="DNI:" />
+                                    <h:outputText value="#{personaManagedBean.persona.dni}" />
+                                    
+                                    <h:outputText value="Sexo:" />
+                                    <h:outputText value="#{personaManagedBean.persona.sexo}" />
+                                    
+                                    <h:outputText value="Teléfono:" />
+                                    <h:outputText value="#{personaManagedBean.persona.telefono}" />
+                                    
+                                    <h:outputText value="Celular 1:" />
+                                    <h:outputText value="#{personaManagedBean.persona.celular1}" />
+                                    
+                                    <h:outputText value="Celular 2:" />
+                                    <h:outputText value="#{personaManagedBean.persona.celular2}" />
+                                    
+                                    <h:outputText value="Correo:" />
+                                    <h:outputText value="#{personaManagedBean.persona.correo}" />
+                                </h:panelGrid>
+                            </p:outputPanel>
+                        </p:dialog>
+                    </h:form>
+                </p:panel>
+            </ui:define>
+        </ui:composition>
+
+    </body>
+</html>

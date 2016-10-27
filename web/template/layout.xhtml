@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/styleHerbarium.css"/>
+        <h:outputStylesheet name="./css/bootstrap.min.css"/>
+        <h:outputStylesheet name="./css/font-awesome.css"/>
+        <title>Herbarium Huamangensis</title>
+    </h:head>
+
+    <h:body>
+
+        <div id="top">
+            <ui:insert name="top">
+                <h:form styleClass="container">  
+                    <p:growl id="messages"/>
+                    <p:menubar>
+                        <p:menuitem value="Inicio" url="/hb/pages/AdministrarColecta.xhtml" icon="fa fa-university"/>
+                        <p:submenu label="Administrar Taxones" icon="fa fa-tree">
+                            <p:menuitem value="Administrar Familias" url="/hb/pages/AdministrarFamilia.xhtml" icon="fa fa-gear" />
+                            <p:menuitem value="Administrar Géneros" url="/hb/pages/AdministrarGenero.xhtml" icon="fa fa-gear" />
+                            <p:menuitem value="Administrar Especies" url="/hb/pages/AdministrarEspecie.xhtml" icon="fa fa-gear" />                            
+                        </p:submenu>
+
+                        <p:menuitem value="Administrar Hábito" url="/hb/pages/AdministrarHabito.xhtml" icon="fa fa-leaf"/>  
+                        <p:menuitem value="Administrar Formación Vegetal" url="/hb/pages/AdministrarFormacion.xhtml" icon="fa fa-leaf"/>  
+
+                        <p:submenu label="Administrar Gabinetes" icon="fa fa-windows">
+                            <p:menuitem value="Administrar Gabinetes" url="/hb/pages/AdministrarGabinete.xhtml" icon="fa fa-windows"/>
+                            <p:menuitem value="Administrar Casilleros" url="/hb/pages/AdministrarCasillero.xhtml" icon="fa fa-table"/>                                
+                        </p:submenu>
+                            
+                        <p:submenu label="Administrar Ubigeo" icon="fa fa-globe">
+                            <p:menuitem value="Administrar Departamento" url="/hb/pages/AdministrarDepartamento.xhtml" icon="fa fa-globe"/>
+                            <p:menuitem value="Administrar Provincia" url="/hb/pages/AdministrarProvincia.xhtml" icon="fa fa-globe"/>                                
+                            <p:menuitem value="Administrar Distrito" url="/hb/pages/AdministrarDistrito.xhtml" icon="fa fa-globe"/>                                
+                            <p:menuitem value="Administrar Personas" url="/hb/pages/AdministrarPersona.xhtml" icon="fa fa-users"/>                                
+                        </p:submenu>
+                        <f:facet name="options" >
+                            <p:inputText style="margin-right:10px" placeholder="Buscar"/>
+                            <p:commandButton type="button" value="Salir" icon="ui-icon-extlink" />
+                        </f:facet>
+                    </p:menubar>
+                </h:form>
+            </ui:insert>
+        </div>
+
+        <div id="content" class="center_content">
+            <ui:insert name="content">Contenido</ui:insert>
+        </div>
+
+        <div id="bottom">
+            <ui:insert name="bottom">Pie de Página</ui:insert>
+        </div>
+        <h:outputScript name="./js/bootstrap.min.js"/>
+    </h:body>
+
+</html>

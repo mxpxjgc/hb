@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/10/2016 12:07:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.jgc.herbarium.be.Ejemplar" table="ejemplar" catalog="herbario" optimistic-lock="version">
+        <id name="idejemplar" type="java.lang.Long">
+            <column name="idejemplar" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="casillero" class="org.jgc.herbarium.be.Casillero" fetch="select">
+            <column name="id_casillero" not-null="true" />
+        </many-to-one>
+        <many-to-one name="colecta" class="org.jgc.herbarium.be.Colecta" fetch="select">
+            <column name="id_colecta" not-null="true" />
+        </many-to-one>
+        <property name="fechaRegistro" type="timestamp">
+            <column name="fecha_registro" length="19" />
+        </property>
+        <property name="numeroEjemplar" type="java.lang.Integer">
+            <column name="numero_ejemplar" />
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="500" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <set name="imagens" table="imagen" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_ejemplar" not-null="true" />
+            </key>
+            <one-to-many class="org.jgc.herbarium.be.Imagen" />
+        </set>
+    </class>
+</hibernate-mapping>

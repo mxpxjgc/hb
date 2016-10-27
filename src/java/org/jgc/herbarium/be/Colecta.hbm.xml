@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/10/2016 12:07:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.jgc.herbarium.be.Colecta" table="colecta" catalog="herbario" optimistic-lock="version">
+        <id name="idcolecta" type="java.lang.Long">
+            <column name="idcolecta" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="distrito" class="org.jgc.herbarium.be.Distrito" fetch="select">
+            <column name="id_ubigeo" not-null="true" />
+        </many-to-one>
+        <many-to-one name="especie" class="org.jgc.herbarium.be.Especie" fetch="select">
+            <column name="id_especie" not-null="true" />
+        </many-to-one>
+        <many-to-one name="formacion" class="org.jgc.herbarium.be.Formacion" fetch="select">
+            <column name="id_formacion_vegetal" />
+        </many-to-one>
+        <property name="localidad" type="string">
+            <column name="localidad" length="40" />
+        </property>
+        <property name="zonaUtm" type="string">
+            <column name="zona_utm" length="5" />
+        </property>
+        <property name="coordenada1Utm" type="string">
+            <column name="coordenada1_utm" length="20" />
+        </property>
+        <property name="coordenada2Utm" type="string">
+            <column name="coordenada2_utm" length="20" />
+        </property>
+        <property name="latitud" type="serializable">
+            <column name="latitud" />
+        </property>
+        <property name="longitud" type="serializable">
+            <column name="longitud" />
+        </property>
+        <property name="altitud" type="java.lang.Integer">
+            <column name="altitud" />
+        </property>
+        <property name="fechaColecta" type="timestamp">
+            <column name="fecha_colecta" length="19" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="1000" />
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="500" />
+        </property>
+        <set name="colectaPersonas" table="colecta_persona" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_colecta" />
+            </key>
+            <one-to-many class="org.jgc.herbarium.be.ColectaPersona" />
+        </set>
+        <set name="ejemplars" table="ejemplar" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_colecta" not-null="true" />
+            </key>
+            <one-to-many class="org.jgc.herbarium.be.Ejemplar" />
+        </set>
+        <set name="fotografias" table="fotografia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_colecta" not-null="true" />
+            </key>
+            <one-to-many class="org.jgc.herbarium.be.Fotografia" />
+        </set>
+    </class>
+</hibernate-mapping>

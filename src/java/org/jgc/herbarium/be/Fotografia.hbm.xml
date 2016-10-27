@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/10/2016 12:07:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.jgc.herbarium.be.Fotografia" table="fotografia" catalog="herbario" optimistic-lock="version">
+        <id name="idfotografia" type="java.lang.Long">
+            <column name="idfotografia" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="colecta" class="org.jgc.herbarium.be.Colecta" fetch="select">
+            <column name="id_colecta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="persona" class="org.jgc.herbarium.be.Persona" fetch="select">
+            <column name="id_fotografo" />
+        </many-to-one>
+        <property name="fotografia" type="binary">
+            <column name="fotografia" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="200" />
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="200" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/10/2016 12:07:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.jgc.herbarium.be.Formacion" table="formacion" catalog="herbario" optimistic-lock="version">
+        <id name="idformacion" type="java.lang.Long">
+            <column name="idformacion" />
+            <generator class="identity" />
+        </id>
+        <property name="formacionVegetal" type="string">
+            <column name="formacionVegetal" length="20" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <set name="colectas" table="colecta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_formacion_vegetal" />
+            </key>
+            <one-to-many class="org.jgc.herbarium.be.Colecta" />
+        </set>
+    </class>
+</hibernate-mapping>

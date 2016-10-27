@@ -1,0 +1,148 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layout.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="msg" showDetail="true" life="3000"/>
+                <p:panel id="panelColecta" header="ADMINISTRAR COLECTA" styleClass="container" style="width: 80%">
+                    <h:form id="formBtnNew">
+                        <p:commandButton id="btnNew" 
+                                         icon="fa fa-file"
+                                         value=" Nuevo" 
+                                         title="Registrar Nueva Colecta" 
+                                         oncomplete="PF('dlgNew').show();" 
+                                         update=":formNew:dlgNew" 
+                                         actionListener="#{colectaMBean.limpiar()}"/> 
+                    </h:form>                    
+                    <h:form id="formDataTable">
+                        <p:dataTable id="lista" 
+                                     value="#{colectaMBean.listaColectas}" 
+                                     var="colectaItem"
+                                     paginator="true" 
+                                     rows="10" 
+                                     paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,15,20">
+                            <f:facet name="header">
+                                Colectas
+                            </f:facet>
+                            <p:column style="width:4%; text-align: center" headerText="Nº">
+                                <h:outputText value="#{colectaItem.idcolecta}" />
+                            </p:column>
+                            <p:column style="" headerText="Especie">
+                                <h:outputText value="#{colectaItem.especie.denominacion}" style="font-style: oblique"/>
+                            </p:column>
+                            <p:column style="" headerText="Ubigeo">
+                                <h:outputText value="#{colectaItem.distrito.denominacion}" />
+                            </p:column>
+                            <p:column style="" headerText="Fecha">
+                                <h:outputText value="#{colectaItem.fechaColecta}" />
+                            </p:column>                            
+                            <p:column style="width:6%;text-align: center">
+                                <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" 
+                                                 icon="fa fa-edit" title="Editar">
+                                    <f:setPropertyActionListener value="#{colectaItem}" target="#{colectaMBean.colecta}" />
+                                </p:commandButton>                            
+                            </p:column>
+                            <p:column style="width:6%;text-align: center">
+                                <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" 
+                                                 immediate="True" icon="fa fa-trash" title="Eliminar">
+                                    <f:setPropertyActionListener value="#{colectaItem}" target="#{colectaMBean.colecta}" />                                    
+                                </p:commandButton>                                
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>                    
+
+                    <h:form id="formNew">
+                        <p:dialog header="Registrar Colecta" widgetVar="dlgNew" id="dlgNew" modal="true"
+                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridNew" columns="2" cellpadding="3">
+                                <h:outputLabel for="cbx_especie" value="Especie" />
+                                <p:selectOneMenu id="cbx_especie" value="#{colectaMBean.colecta.especie.idespecie}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{especieMBean.selectOneItemsEspecie}" />
+                                </p:selectOneMenu>
+                                <h:outputLabel for="cbx_dpto" value="Departamento: " />
+                                <p:selectOneMenu id="cbx_dpto" value="#{dptoMBean.departamento.iddepartamento}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{dptoMBean.selectOneItemsDepartamento}" />
+                                </p:selectOneMenu>
+                                <h:outputLabel for="cbx_prov" value="Provincia: " />
+                                <p:selectOneMenu id="cbx_prov" value="#{provinciaManagedBean.provincia.idprovincia}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{provinciaManagedBean.selectOneItemsProvincia}" />
+                                </p:selectOneMenu>
+                                <h:outputLabel for="cbx_distr" value="Distrito: " />
+                                <p:selectOneMenu id="cbx_distr" value="#{colectaMBean.colecta.distrito.iddistrito}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{distritoMBean.selectOneItemsDistrito}" />
+                                </p:selectOneMenu>
+                                <h:outputLabel for="localidad" value="Localidad: " />
+                                <p:inputText id="localidad" label="Localidad"
+                                             value="#{colectaMBean.colecta.localidad}" size="60"/>
+                                
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnRegistrar" icon="fa fa-save text-success" value="Guardar" title="Guardar"  
+                                                     oncomplete="PF('dlgNew').hide()" update=":msg,:formDataTable" actionListener="#{colectaMBean.registrarColecta}" />
+                                    <p:commandButton id="btnCancelarRegistro"  icon="fa fa-remove text-danger" value="Cancelar" title="Cancelar" oncomplete="PF('dlgNew').hide()" update="formNew" immediate="true"/>
+                                </f:facet>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formEdit">
+                        <p:dialog header="Actualizar datos" widgetVar="dlgEdit" id="dlgEdit"  
+                                  modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">                                                     
+                                <h:outputLabel/>
+                                <h:inputHidden value="#{colectaMBean.colecta.idcolecta}" />
+                                <h:outputText value="Colecta: " />
+                                <p:inputText id="txt_editar_denominacion_colecta" required="true" placeholder="INGRESE COLECTA" 
+                                             value="#{colectaMBean.colecta.denominacion}" size="60"/>
+                                <h:outputText value="Abreviatura: " />
+                                <p:inputText id="txt_editar_abreviatura_colecta" placeholder="INGRESE ABREVIATURA" 
+                                             value="#{colectaMBean.colecta.abreviatura}" size="60"/>
+
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
+                                                     oncomplete="PF('dlgEdit').hide()" icon="fa fa-save text-success" 
+                                                     title="Guardar" value="Guardar" actionListener="#{colectaMBean.actualizarColecta(actionEvent)}"/>
+                                    <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide()" 
+                                                     icon="fa fa-remove text-danger" title="Cancelar" value="Cancelar" immediate="true"/>
+                                </f:facet>
+
+                            </h:panelGrid>
+
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formDelete">
+                        <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
+                                         header="Eliminar Registro" showEffect="fade" 
+                                         hideEffect="explode" widgetVar="dlgDelete" closable="false">
+                            <h:inputHidden value="#{colectaMBean.colecta.idcolecta}" />
+                            <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
+                                             icon="fa fa-save text-success" oncomplete="PF('dlgDelete').hide()" actionListener="#{colectaMBean.eliminarColecta}"/>
+
+                            <p:commandButton id="btnCancel" value="Cancelar" icon="fa fa-remove text-danger" oncomplete="PF('dlgDelete').hide()" />
+
+                        </p:confirmDialog>
+                    </h:form>
+                </p:panel>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

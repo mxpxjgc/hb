@@ -1,0 +1,174 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layout.xhtml">
+
+            <ui:define name="content">
+                <p:growl id="msg" showDetail="true" life="3000"/>
+                <p:panel id="pnl_adminEspecie" header="Administrar Especie" styleClass="container">
+                    <h:form id="formBtnNew">
+                        <p:commandButton id="btnNew" update=":formNew" oncomplete="PF('dlgNew').show();" icon="fa fa-file" title="Nuevo"
+                                         value="Nuevo" actionListener="#{especieMBean.limpiar()}"/>                  
+                    </h:form>
+
+                    <h:form id="formDataTable" >
+                        <p:dataTable id="lista" value="#{especieMBean.listaEspecies}" var="especieItem"
+                                     paginator="true" rows="10" paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="10,15,20">
+                            <f:facet name="header">
+                                Especies
+                            </f:facet>
+                            
+                            <p:column headerText="Nº" width="60">
+                                <h:outputText value="#{especieItem.idespecie}" />
+                            </p:column>
+                            <p:column headerText="Género">
+                                <h:outputText value="#{especieItem.genero.denominacion}" style="font-style: oblique"/>
+                            </p:column>
+                            <p:column headerText="Especie">
+                                <h:outputText value="#{especieItem.denominacion}" style="font-style: oblique"/>
+                            </p:column>
+                            <p:column headerText="Autor">
+                                <h:outputText value="#{especieItem.autor}" />
+                            </p:column>
+                            <p:column headerText="Nombre Vulgar">
+                                <h:outputText value="#{especieItem.nombreVulgar1}" />
+                            </p:column>
+                            <p:column style="width:6%;text-align: center">
+                                <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="fa fa-edit" title="Editar">
+                                    <f:setPropertyActionListener value="#{especieItem}" target="#{especieMBean.especie}" />
+                                </p:commandButton>                            
+                            </p:column>
+                            <p:column style="width:6%;text-align: center">
+                                <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" immediate="True"
+                                                 icon="fa fa-trash" title="Eliminar">
+                                    <f:setPropertyActionListener value="#{especieItem}" target="#{especieMBean.especie}" />          
+                                </p:commandButton>                                                        
+
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+
+                    <h:form id="formNew">
+                        <p:dialog header="Registrar Especie" widgetVar="dlgNew" id="dlgNew" modal="true"
+                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridNew" columns="2" cellpadding="3">
+
+                                <h:outputLabel for="cbx_genero" value="G&eacute;nero:" />
+                                <p:selectOneMenu id="cbx_genero" value="#{especieMBean.especie.genero.idgenero}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{generoManagedBean.selectOneItemsGenero}" />
+                                </p:selectOneMenu>
+                                <h:outputLabel for="txt_denominacion" value="Denominaci&oacute;n:" />                            
+                                <p:inputText id="txt_denominacion" label="Denominaci&oacute;n" placeholder="DENOMINACI&Oacute;N"
+                                             value="#{especieMBean.especie.denominacion}" size="60"/>
+                                <h:outputLabel for="txt_autor" value="Autor:" />                            
+                                <p:inputText id="txt_autor" label="Autor:" placeholder="AUTOR"
+                                             value="#{especieMBean.especie.autor}"/>
+                                <h:outputLabel for="txt_nombrev1" value="Nombre Vulgar 1:" />                            
+                                <p:inputText id="txt_nombrev1" label="Nombre Vulgar 1:" placeholder="NOMBRE VULGAR 1"
+                                             value="#{especieMBean.especie.nombreVulgar1}"/>
+                                <h:outputLabel for="txt_nombrev2" value="Nombre Vulgar 2:" />                            
+                                <p:inputText id="txt_nombrev2" label="Nombre Vulgar 2:" placeholder="NOMBRE VULGAR 2"
+                                             value="#{especieMBean.especie.nombreVulgar2}"/>
+                                <h:outputLabel for="txt_nombrev3" value="Nombre Vulgar 3:" />                            
+                                <p:inputText id="txt_nombrev3" label="Nombre Vulgar 3:" placeholder="NOMBRE VULGAR 3"
+                                             value="#{especieMBean.especie.nombreVulgar3}"/>
+                                <h:outputLabel for="cbx_habito" value="Hábito" />
+                                <p:selectOneMenu id="cbx_habito" value="#{especieMBean.especie.habito.idhabito}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{habitoManagedBean.selectOneItemsHabito}" />
+                                </p:selectOneMenu>
+                                <h:outputLabel for="txt_descripcion" value="Descripción:" />                            
+                                <p:inputText id="txt_descripcion" label="Descripción:" placeholder="DESCRIPCIÓN"
+                                             value="#{especieMBean.especie.descripcion}"/>
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnRegistrar" update=":formDataTable, :msg"
+                                                     oncomplete="PF('dlgNew').hide()" icon="fa fa-save text-success" 
+                                                     value="Guardar" title="Guardar" actionListener="#{especieMBean.registrarEspecie}"/>
+                                    <p:commandButton id="btnCancelarRegistro"  oncomplete="PF('dlgNew').hide()" immediate="true"
+                                                     icon="fa fa-remove text-danger" value="Cancelar" title="Cancelar"/>
+                                </f:facet>
+                            </h:panelGrid>
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formEdit">
+                        <p:dialog header="Actualizar datos" widgetVar="dlgEdit" id="dlgEdit"  
+                                  modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
+                            <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">
+                                <h:outputLabel/>
+                                <h:inputHidden value="#{especieMBean.especie.idespecie}" />
+                                <h:outputLabel for="cbx_edit_genero" value="G&eacute;nero:" />
+                                <p:selectOneMenu id="cbx_edit_genero" value="#{especieMBean.especie.genero.idgenero}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{generoManagedBean.selectOneItemsGenero}" />
+                                </p:selectOneMenu>
+                                <h:outputLabel for="txt_edit_denominacion" value="Denominación:" />                            
+                                <p:inputText id="txt_edit_denominacion" required="true" label="Denaminación" placeholder="DENOMINACIÓN"
+                                             value="#{especieMBean.especie.denominacion}" size="60"/>
+
+                                <h:outputLabel for="txt_edit_autor" value="Autor:" />                            
+                                <p:inputText id="txt_edit_autor" label="Autor" placeholder="AUTOR"
+                                             value="#{especieMBean.especie.autor}"/>                                
+                                <h:outputLabel for="txt_edit_nombrev1" value="Nombre Vulgar 1:" />                            
+                                <p:inputText id="txt_edit_nombrev1" label="Nombre Vulgar 1" placeholder="NOMBRE VULGAR 1"
+                                             value="#{especieMBean.especie.nombreVulgar1}"/>                                
+                                <h:outputLabel for="txt_edit_nombrev2" value="Nombre Vulgar 2:" />                            
+                                <p:inputText id="txt_edit_nombrev2" label="Nombre Vulgar 2" placeholder="NOMBRE VULGAR 2"
+                                             value="#{especieMBean.especie.nombreVulgar2}"/>                                
+                                <h:outputLabel for="txt_edit_nombrev3" value="Nombre Vulgar 3:" />                            
+                                <p:inputText id="txt_edit_nombrev3" label="Nombre Vulgar 3" placeholder="NOMBRE VULGAR 3"
+                                             value="#{especieMBean.especie.nombreVulgar3}"/>
+                                <h:outputLabel for="cbx_edit_habito" value="Hábito:" />
+                                <p:selectOneMenu id="cbx_edit_habito" value="#{especieMBean.especie.habito.idhabito}" style="width: 388px">
+                                    <f:selectItem itemLabel="--Seleccione--" />
+                                    <f:selectItems value="#{habitoManagedBean.selectOneItemsHabito}" />
+                                </p:selectOneMenu>
+                                <h:outputLabel for="txt_edit_descripcion" value="Descripción:" />                            
+                                <p:inputText id="txt_edit_descripcion" label="Descripción" placeholder="DESCRIPCIÓN"
+                                             value="#{especieMBean.especie.descripcion}"/>
+                                <f:facet name="footer">
+                                    <p:separator/>
+                                    <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
+                                                     oncomplete="PF('dlgEdit').hide()" icon="fa fa-save text-success" 
+                                                     title="Guardar" value="Guardar" actionListener="#{especieMBean.actualizarEspecie}"/>
+                                    <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide()" immediate="true"
+                                                     icon="fa fa-remove text-danger" title="Cancelar" value="Cancelar" />
+                                </f:facet>
+
+                            </h:panelGrid>
+
+                        </p:dialog>
+                    </h:form>
+
+                    <h:form id="formDelete">
+                        <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
+                                         header="Eliminar Registro" showEffect="fade" 
+                                         hideEffect="explode" widgetVar="dlgDelete">
+                            <h:inputHidden value="#{especieMBean.especie.idespecie}" />
+                            <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
+                                             icon="fa fa-save text-success" oncomplete="PF('dlgDelete').hide()" 
+                                             actionListener="#{generoManagedBean.eliminarGenero()}"/>
+
+                            <p:commandButton id="btnCancel" value="Cancelar" styleClass="ui-confirmdialog-no" 
+                                             icon="fa fa-remove text-danger" oncomplete="PF('dlgDelete').hide()" />
+
+                        </p:confirmDialog>
+                    </h:form>
+                </p:panel>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

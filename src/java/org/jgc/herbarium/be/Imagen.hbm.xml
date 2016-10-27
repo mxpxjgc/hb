@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 03/10/2016 12:07:54 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.jgc.herbarium.be.Imagen" table="imagen" catalog="herbario" optimistic-lock="version">
+        <id name="idimagen" type="java.lang.Long">
+            <column name="idimagen" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="ejemplar" class="org.jgc.herbarium.be.Ejemplar" fetch="select">
+            <column name="id_ejemplar" not-null="true" />
+        </many-to-one>
+        <property name="imagenOriginal" type="binary">
+            <column name="imagen_original" />
+        </property>
+        <property name="imagenReducido" type="binary">
+            <column name="imagen_reducido" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="100" />
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>
