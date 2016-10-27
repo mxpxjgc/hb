@@ -43,32 +43,26 @@ public class FamiliaMBean {
     
     public void actualizarFamilia(ActionEvent actionEvent) {
         Familia temp = new Familia();
-        String msg;
         temp = buscarId();
         temp.setDenominacion(this.getFamilia().getDenominacion());
         temp.setAbreviatura(this.getFamilia().getAbreviatura());
         long res = familiaBL.actualizar(temp);
         if(res==0){
-            msg="Se actualizó correctamente el registro.";
-            mostrarMensaje(msg);
+            mostrarMensaje("Se actualizó correctamente el registro.",FacesMessage.SEVERITY_INFO);
         }else{
-            msg="Error al actualizar el registro.";
-            mostrarMensaje(msg);
+            mostrarMensaje("Error al actualizar el registro.",FacesMessage.SEVERITY_ERROR);
         }
         listarFamilia();
     }
     
     public void eliminarFamilia() {    
         Familia temp = new Familia();
-        String msg;
         temp = buscarId();
         long res = familiaBL.eliminar(temp);        
         if(res==0){
-            msg="Se eliminó correctamente el registro.";
-            mostrarMensaje(msg);
+            mostrarMensaje("Se eliminó correctamente el registro.",FacesMessage.SEVERITY_INFO);
         }else{
-            msg="Error al eliminar el registro.";
-            mostrarMensaje(msg);
+            mostrarMensaje("Error al eliminar el registro.",FacesMessage.SEVERITY_ERROR);
         }              
         listarFamilia();
     }
@@ -93,8 +87,8 @@ public class FamiliaMBean {
         setListaFamilia(familiaBL.listar());
     }
     
-    public void mostrarMensaje(String msg){
-        FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Atención", msg);
+    public void mostrarMensaje(String msg, FacesMessage.Severity sev){
+        FacesMessage message = new FacesMessage(sev, "Atención", msg);
         FacesContext.getCurrentInstance().addMessage(null, message);
     }
     
