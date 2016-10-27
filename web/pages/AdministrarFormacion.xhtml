@@ -20,11 +20,11 @@
                                          title="Registrar Nueva Formación Vegetal" 
                                          oncomplete="PF('dlgNew').show();" 
                                          update=":formNew:dlgNew" 
-                                         actionListener="#{formacionManagedBean.limpiar()}"/> 
+                                         actionListener="#{formacionMBean.limpiar()}"/> 
                     </h:form>                    
                     <h:form id="formDataTable">
                         <p:dataTable id="lista" 
-                                     value="#{formacionManagedBean.listaFormacion}" 
+                                     value="#{formacionMBean.listaFormacion}" 
                                      var="formacionItem"
                                      paginator="true" 
                                      rows="10" 
@@ -43,13 +43,13 @@
                             <p:column style="width:10%;text-align: center">
                                 <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" 
                                                  icon="fa fa-edit" title="Editar">
-                                    <f:setPropertyActionListener value="#{formacionItem}" target="#{formacionManagedBean.formacion}" />
+                                    <f:setPropertyActionListener value="#{formacionItem}" target="#{formacionMBean.formacion}" />
                                 </p:commandButton>                            
                             </p:column>
                             <p:column style="width:10%;text-align: center">
                                 <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" 
                                                  immediate="True" icon="fa fa-trash" title="Eliminar">
-                                    <f:setPropertyActionListener value="#{formacionItem}" target="#{formacionManagedBean.formacion}" />                                    
+                                    <f:setPropertyActionListener value="#{formacionItem}" target="#{formacionMBean.formacion}" />                                    
                                 </p:commandButton>                                
                             </p:column>
                         </p:dataTable>
@@ -61,11 +61,11 @@
                             <h:panelGrid id="gridNew" columns="2" cellpadding="3">
                                 <h:outputLabel for="formacion_vegetal" value="Formación Vegetal: " />
                                 <p:inputText id="formacion_vegetal" required="true" label="Formación Vegetal"
-                                             value="#{formacionManagedBean.formacion.formacionVegetal}" placeholder="FORMACIÓN VEGETAL" size="60"/>                                
+                                             value="#{formacionMBean.formacion.formacionVegetal}" placeholder="FORMACIÓN VEGETAL" size="60"/>                                
                                 <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnRegistrar" icon="fa fa-save text-success" value="Guardar" title="Guardar"  
-                                                     oncomplete="PF('dlgNew').hide()" update=":msg,:formDataTable" actionListener="#{formacionManagedBean.registrarFormacionVegetal}" />
+                                                     oncomplete="PF('dlgNew').hide()" update=":msg,:formDataTable" actionListener="#{formacionMBean.registrarFormacionVegetal}" />
                                     <p:commandButton id="btnCancelarRegistro"  icon="fa fa-remove text-danger" value="Cancelar" title="Cancelar" oncomplete="PF('dlgNew').hide()" update="formNew" immediate="true"/>
                                 </f:facet>
                             </h:panelGrid>
@@ -77,15 +77,15 @@
                                   modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
                             <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">                                                     
                                 <h:outputLabel/>
-                                <h:inputHidden value="#{formacionManagedBean.formacion.idformacion}" />
+                                <h:inputHidden value="#{formacionMBean.formacion.idformacion}" />
                                 <h:outputText value="Formación Vegetal: " />
                                 <p:inputText id="txt_editar_formación" required="true" placeholder="INGRESE FORMACIÓN VEGETAL" 
-                                             value="#{formacionManagedBean.formacion.formacionVegetal}" size="60"/>
+                                             value="#{formacionMBean.formacion.formacionVegetal}" size="60"/>
                                 <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
                                                      oncomplete="PF('dlgEdit').hide()" icon="fa fa-save text-success" 
-                                                     title="Guardar" value="Guardar" actionListener="#{formacionManagedBean.actualizarFormacionVegetal}"/>
+                                                     title="Guardar" value="Guardar" actionListener="#{formacionMBean.actualizarFormacionVegetal}"/>
                                     <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide()" 
                                                      icon="fa fa-remove text-danger" title="Cancelar" value="Cancelar" immediate="true"/>
                                 </f:facet>
@@ -99,9 +99,9 @@
                         <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
                                          header="Eliminar Registro" showEffect="fade" 
                                          hideEffect="explode" widgetVar="dlgDelete" closable="false">
-                            <h:inputHidden value="#{formacionManagedBean.formacion.idformacion}" />
+                            <h:inputHidden value="#{formacionMBean.formacion.idformacion}" />
                             <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
-                                             icon="fa fa-save text-success" oncomplete="PF('dlgDelete').hide()" actionListener="#{formacionManagedBean.eliminarFormacionVegetal}"/>
+                                             icon="fa fa-save text-success" oncomplete="PF('dlgDelete').hide()" actionListener="#{formacionMBean.eliminarFormacionVegetal}"/>
 
                             <p:commandButton id="btnCancel" value="Cancelar" icon="fa fa-remove text-danger" oncomplete="PF('dlgDelete').hide()" />
 

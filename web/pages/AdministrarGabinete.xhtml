@@ -20,11 +20,11 @@
                                          title="Registrar Nuevo Gabinete" 
                                          oncomplete="PF('dlgNew').show();" 
                                          update=":formNew:dlgNew" 
-                                         actionListener="#{gabineteManagedBean.limpiar()}"/> 
+                                         actionListener="#{gabineteMBean.limpiar()}"/> 
                     </h:form>                    
                     <h:form id="formDataTable">
                         <p:dataTable id="lista" 
-                                     value="#{gabineteManagedBean.listaGabinetes}" 
+                                     value="#{gabinegabineteMBeanGabinetes}" 
                                      var="gabineteItem"
                                      paginator="true" 
                                      rows="10" 
@@ -54,13 +54,13 @@
                             <p:column style="width:10%;text-align: center">
                                 <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" 
                                                  icon="fa fa-edit" title="Editar">
-                                    <f:setPropertyActionListener value="#{gabineteItem}" target="#{gabineteManagedBean.gabinete}" />
+                                    <f:setPropertyActionListener value="#{gabineteItem}" target="#{gabineteManagabineteMBean/>
                                 </p:commandButton>                            
                             </p:column>
                             <p:column style="width:10%;text-align: center">
                                 <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" 
                                                  immediate="True" icon="fa fa-trash" title="Eliminar">
-                                    <f:setPropertyActionListener value="#{gabineteItem}" target="#{gabineteManagedBean.gabinete}" />                                    
+                                    <f:setPropertyActionListener value="#{gabineteItem}" target="#{gabineteManagedBeagabineteMBean                                
                                 </p:commandButton>                                
                             </p:column>
                         </p:dataTable>
@@ -72,18 +72,17 @@
                             <h:panelGrid id="gridNew" columns="2" cellpadding="3">
                                 <h:outputLabel for="nombre" value="Nombre: " />
                                 <p:inputText id="nombre" required="true" label="Nombre"
-                                             value="#{gabineteManagedBean.gabinete.nombre}" placeholder="NOMBRE" size="60"/>
+                                             value="#{gabineteManagedBean.gabigabineteMBeanholder="NOMBRE" size="60"/>
                                 <h:outputLabel for="codigo" value="Codigo: " />
                                 <p:inputText id="codigo" required="true" label="Codigo"
-                                             value="#{gabineteManagedBean.gabinete.codigo}" placeholder="CODIGO" size="60"/> 
+                                             value="#{gabineteManagedBean.gabinete.cgabineteMBean="CODIGO" size="60"/> 
                                 <h:outputLabel for="descripcion" value="Descripción: " />
                                 <p:inputText id="descripcion" required="true" label="Descripción"
-                                             value="#{gabineteManagedBean.gabinete.descripcion}" placeholder="DESCRIPCIÓN" size="60"/>   
+                                             value="#{gabineteManagedBean.gabinete.descripgabineteMBean"DESCRIPCIÓN" size="60"/>   
                                 <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnRegistrar" icon="fa fa-save text-success" value="Guardar" title="Guardar"  
-                                                     oncomplete="PF('dlgNew').hide()" update=":msg,:formDataTable" actionListener="#{gabineteManagedBean.registrarGabinete}" />
-                                    <p:commandButton id="btnCancelarRegistro"  icon="fa fa-remove text-danger" value="Cancelar" title="Cancelar" oncomplete="PF('dlgNew').hide()" update="formNew" immediate="true"/>
+                                                     oncomplete="PF('dlgNew').hide()" update=":msg,:formDataTable" actionListener="#{gabineteManagedBean.registrarGabinete}" />gabineteMBean                  <p:commandButton id="btnCancelarRegistro"  icon="fa fa-remove text-danger" value="Cancelar" title="Cancelar" oncomplete="PF('dlgNew').hide()" update="formNew" immediate="true"/>
                                 </f:facet>
                             </h:panelGrid>
                         </p:dialog>
@@ -95,21 +94,19 @@
                             <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">                                                     
                                 <h:outputLabel/>
                                 <h:inputHidden value="#{gabineteManagedBean.gabinete.idgabinete}" />
-                                <h:outputText value="Nombre: " />
+   gabineteMBean          <h:outputText value="Nombre: " />
                                 <p:inputText id="txt_editar_nombre" placeholder="INGRESE NOMBRE" 
-                                             value="#{gabineteManagedBean.gabinete.nombre}" size="60"/>
+                                             value="#{gabineteManagedBean.gabinete.ngabineteMBean
                                 <h:outputText value="Código: " />
                                 <p:inputText id="txt_editar_codigo" placeholder="INGRESE CÓDIGO" 
-                                             value="#{gabineteManagedBean.gabinete.codigo}" size="60"/>
-                                <h:outputText value="Descripción: " />
+                                             value="#{gabineteManagedBean.gabinete.codigo}" sizegabineteMBean                     <h:outputText value="Descripción: " />
                                 <p:inputText id="txt_editar_descripcion" placeholder="INGRESE DESCRIPCIÓN" 
-                                             value="#{gabineteManagedBean.gabinete.descripcion}" size="60"/>
-                                <f:facet name="footer">
+                                             value="#{gabineteManagedBean.gabinete.descripcion}" size="60"/>gabineteMBean              <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
                                                      oncomplete="PF('dlgEdit').hide()" icon="fa fa-save text-success" 
                                                      title="Guardar" value="Guardar" actionListener="#{gabineteManagedBean.actualizarGabinete}"/>
-                                    <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide()" 
+                             gabineteMBeantton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide()" 
                                                      icon="fa fa-remove text-danger" title="Cancelar" value="Cancelar" immediate="true"/>
                                 </f:facet>
 
@@ -123,10 +120,10 @@
                                          header="Eliminar Registro" showEffect="fade" 
                                          hideEffect="explode" widgetVar="dlgDelete" closable="false">
                             <h:inputHidden value="#{gabineteManagedBean.gabinete.idgabinete}" />
-                            <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
+                           gabineteMBeand="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
                                              icon="fa fa-save text-success" oncomplete="PF('dlgDelete').hide()" actionListener="#{gabineteManagedBean.eliminarGabinete}"/>
 
-                            <p:commandButton id="btnCancel" value="Cancelar" icon="fa fa-remove text-danger" oncomplete="PF('dlgDelete').hide()" />
+                            <p:commandButtgabineteMBeanalue="Cancelar" icon="fa fa-remove text-danger" oncomplete="PF('dlgDelete').hide()" />
 
                         </p:confirmDialog>
                     </h:form>

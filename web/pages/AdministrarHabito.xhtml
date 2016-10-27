@@ -20,11 +20,11 @@
                                          title="Registrar Nuevo Hábito" 
                                          oncomplete="PF('dlgNew').show();" 
                                          update=":formNew:dlgNew" 
-                                         actionListener="#{habitoManagedBean.limpiar()}"/> 
+                                         actionListener="#{habitoMBean.limpiar()}"/> 
                     </h:form>                    
                     <h:form id="formDataTable">
                         <p:dataTable id="lista" 
-                                     value="#{habitoManagedBean.listaHabito}" 
+                                     value="#{habitoMBean.listaHabito}" 
                                      var="habitoItem"
                                      paginator="true" 
                                      rows="10" 
@@ -43,13 +43,13 @@
                             <p:column style="width:10%;text-align: center">
                                 <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" 
                                                  icon="fa fa-edit" title="Editar">
-                                    <f:setPropertyActionListener value="#{habitoItem}" target="#{habitoManagedBean.habito}" />
+                                    <f:setPropertyActionListener value="#{habitoItem}" target="#{habitoMBean.habito}" />
                                 </p:commandButton>                            
                             </p:column>
                             <p:column style="width:10%;text-align: center">
                                 <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" 
                                                  immediate="True" icon="fa fa-trash" title="Eliminar">
-                                    <f:setPropertyActionListener value="#{habitoItem}" target="#{habitoManagedBean.habito}" />                                    
+                                    <f:setPropertyActionListener value="#{habitoItem}" target="#{habitoMBean.habito}" />                                    
                                 </p:commandButton>                                
                             </p:column>
                         </p:dataTable>
@@ -61,11 +61,11 @@
                             <h:panelGrid id="gridNew" columns="2" cellpadding="3">
                                 <h:outputLabel for="nombrehabito" value="Hábito: " />
                                 <p:inputText id="nombrehabito" required="true" label="Hábito"
-                                             value="#{habitoManagedBean.habito.nombrehabito}" placeholder="HÁBITO" size="60"/>                                
+                                             value="#{habitoMBean.habito.nombrehabito}" placeholder="HÁBITO" size="60"/>                                
                                 <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnRegistrar" icon="fa fa-save text-success" value="Guardar" title="Guardar"  
-                                                     oncomplete="PF('dlgNew').hide()" update=":msg,:formDataTable" actionListener="#{habitoManagedBean.registrarHabito}" />
+                                                     oncomplete="PF('dlgNew').hide()" update=":msg,:formDataTable" actionListener="#{habitoMBean.registrarHabito}" />
                                     <p:commandButton id="btnCancelarRegistro"  icon="fa fa-remove text-danger" value="Cancelar" title="Cancelar" oncomplete="PF('dlgNew').hide()" update="formNew" immediate="true"/>
                                 </f:facet>
                             </h:panelGrid>
@@ -77,15 +77,15 @@
                                   modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
                             <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">                                                     
                                 <h:outputLabel/>
-                                <h:inputHidden value="#{habitoManagedBean.habito.idhabito}" />
+                                <h:inputHidden value="#{habitoMBean.habito.idhabito}" />
                                 <h:outputText value="Hábito: " />
                                 <p:inputText id="txt_editar_nombre_habito" required="true" placeholder="INGRESE HÁBITO" 
-                                             value="#{habitoManagedBean.habito.nombrehabito}" size="60"/>
+                                             value="#{habitoMBean.habito.nombrehabito}" size="60"/>
                                 <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
                                                      oncomplete="PF('dlgEdit').hide()" icon="fa fa-save text-success" 
-                                                     title="Guardar" value="Guardar" actionListener="#{habitoManagedBean.actualizarHabito}"/>
+                                                     title="Guardar" value="Guardar" actionListener="#{habitoMBean.actualizarHabito}"/>
                                     <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide()" 
                                                      icon="fa fa-remove text-danger" title="Cancelar" value="Cancelar" immediate="true"/>
                                 </f:facet>
@@ -99,9 +99,9 @@
                         <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
                                          header="Eliminar Registro" showEffect="fade" 
                                          hideEffect="explode" widgetVar="dlgDelete" closable="false">
-                            <h:inputHidden value="#{habitoManagedBean.habito.idhabito}" />
+                            <h:inputHidden value="#{habitoMBean.habito.idhabito}" />
                             <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
-                                             icon="fa fa-save text-success" oncomplete="PF('dlgDelete').hide()" actionListener="#{habitoManagedBean.eliminarHabito}"/>
+                                             icon="fa fa-save text-success" oncomplete="PF('dlgDelete').hide()" actionListener="#{habitoMBean.eliminarHabito}"/>
 
                             <p:commandButton id="btnCancel" value="Cancelar" icon="fa fa-remove text-danger" oncomplete="PF('dlgDelete').hide()" />
 

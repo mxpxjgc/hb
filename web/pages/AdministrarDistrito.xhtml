@@ -62,7 +62,7 @@
                                 <h:outputLabel for="cbx_provincia" value="Provincia: " />
                                 <p:selectOneMenu id="cbx_provincia" value="#{distritoMBean.distrito.provincia.idprovincia}" style="width: 388px">
                                     <f:selectItem itemLabel="--Seleccione--" />
-                                    <f:selectItems value="#{provinciaManagedBean.selectOneItemsProvincia}" />
+                                    <f:selectItems value="#{provinciaMBean.selectOneItemsProvincia}" />
                                 </p:selectOneMenu>
                                 <h:outputLabel for="denominacion" value="Distrito: " />
                                 <p:inputText id="denominacion" required="true" label="Distrito"
@@ -86,7 +86,7 @@
                                 <h:outputLabel for="cbx_edit_provincia" value="Provincia: " />
                                 <p:selectOneMenu id="cbx_edit_provincia" value="#{distritoMBean.distrito.provincia.idprovincia}" style="width: 388px">
                                     <f:selectItem itemLabel="--Seleccione--" itemDisabled="true"/>
-                                    <f:selectItems value="#{provinciaManagedBean.selectOneItemsProvincia}" />
+                                    <f:selectItems value="#{provinciaMBean.selectOneItemsProvincia}" />
                                 </p:selectOneMenu>
                                 <h:outputText value="Distrito: " />
                                 <p:inputText id="txt_editar_distrito" required="true" placeholder="INGRESE DISTRITO" 

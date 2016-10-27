@@ -20,11 +20,11 @@
                                          title="Registrar Nueva Persona" 
                                          oncomplete="PF('dlgNew').show();" 
                                          update=":formNew:dlgNew" 
-                                         actionListener="#{personaManagedBean.limpiar()}"/> 
+                                         actionListener="#{personaMBean.limpiar()}"/> 
                     </h:form>                    
                     <h:form id="formDataTable">
                         <p:dataTable id="lista" 
-                                     value="#{personaManagedBean.listaPersona}" 
+                                     value="#{personaMBean.listaPersona}" 
                                      var="personaItem"
                                      paginator="true" 
                                      rows="10" 
@@ -51,20 +51,20 @@
                             </p:column> 
                             <p:column style="width:6%;text-align: center">
                                 <p:commandButton update=":formDetail" oncomplete="PF('dlgDetail').show()" icon="ui-icon-search" title="Detalle">
-                                    <f:setPropertyActionListener value="#{personaItem}" target="#{personaManagedBean.persona}" />
+                                    <f:setPropertyActionListener value="#{personaItem}" target="#{personaMBean.persona}" />
                                 </p:commandButton>
                             </p:column>
 
                             <p:column style="width:6%;text-align: center">
                                 <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" 
                                                  icon="fa fa-edit" title="Editar">
-                                    <f:setPropertyActionListener value="#{personaItem}" target="#{personaManagedBean.persona}" />
+                                    <f:setPropertyActionListener value="#{personaItem}" target="#{personaMBean.persona}" />
                                 </p:commandButton>                            
                             </p:column>
                             <p:column style="width:6%;text-align: center">
                                 <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" 
                                                  immediate="True" icon="fa fa-trash" title="Eliminar">
-                                    <f:setPropertyActionListener value="#{personaItem}" target="#{personaManagedBean.persona}" />                                    
+                                    <f:setPropertyActionListener value="#{personaItem}" target="#{personaMBean.persona}" />                                    
                                 </p:commandButton>                                
                             </p:column>
                         </p:dataTable>
@@ -76,37 +76,37 @@
                             <h:panelGrid id="gridNew" columns="2" cellpadding="3">
                                 <h:outputLabel for="nombres" value="Código: " />
                                 <p:inputText id="nombres" required="true" label="Nombres"
-                                             value="#{personaManagedBean.persona.nombres}" placeholder="NOMBRES" size="60"/>
+                                             value="#{personaMBean.persona.nombres}" placeholder="NOMBRES" size="60"/>
                                 <h:outputLabel for="appaterno" value="Apellido Paterno: " />
                                 <p:inputText id="appaterno" required="true" label="Apellido Paterno"
-                                             value="#{personaManagedBean.persona.apPaterno}" placeholder="APELLIDO PATERNO" size="60"/>
+                                             value="#{personaMBean.persona.apPaterno}" placeholder="APELLIDO PATERNO" size="60"/>
                                 <h:outputLabel for="apmaterno" value="Apellido Materno: " />
                                 <p:inputText id="apmaterno" required="true" label="Apellido Materno"
-                                             value="#{personaManagedBean.persona.apMaterno}" placeholder="APELLIDO mATERNO" size="60"/>
+                                             value="#{personaMBean.persona.apMaterno}" placeholder="APELLIDO mATERNO" size="60"/>
                                 <h:outputLabel for="dni" value="DNI: " />
                                 <p:inputText id="dni" required="true" label="DNI"
-                                             value="#{personaManagedBean.persona.dni}" placeholder="DNI" size="40"/>
+                                             value="#{personaMBean.persona.dni}" placeholder="DNI" size="40"/>
                                 <h:outputLabel for="sexo" value="Sexo: " />
-                                <p:selectOneRadio id="radioSexo" value="#{personaManagedBean.persona.sexo}">
+                                <p:selectOneRadio id="radioSexo" value="#{personaMBean.persona.sexo}">
                                     <f:selectItem itemLabel="Masculino" itemValue="0" />
                                     <f:selectItem itemLabel="Femenino" itemValue="1" />
                                 </p:selectOneRadio>
                                 <h:outputLabel for="telefono" value="Teléfono: " />
                                 <p:inputText id="telefono" label="Teléfono "
-                                             value="#{personaManagedBean.persona.telefono}" placeholder="TELÉFONO" size="40"/>
+                                             value="#{personaMBean.persona.telefono}" placeholder="TELÉFONO" size="40"/>
                                 <h:outputLabel for="celular1" value="Celular:  " />
                                 <p:inputText id="celular1" label="Celular 1 "
-                                             value="#{personaManagedBean.persona.celular1}" placeholder="CELULAR 1" size="40"/>
+                                             value="#{personaMBean.persona.celular1}" placeholder="CELULAR 1" size="40"/>
                                 <h:outputLabel for="celular2" value="Celular:  " />
                                 <p:inputText id="celular2" label="Celular 2 "
-                                             value="#{personaManagedBean.persona.celular2}" placeholder="CELULAR 2" size="40"/>
+                                             value="#{personaMBean.persona.celular2}" placeholder="CELULAR 2" size="40"/>
                                 <h:outputLabel for="correo" value="Correo:  " />
                                 <p:inputText id="correo" label="Correo "
-                                             value="#{personaManagedBean.persona.correo}" placeholder="CORREO" size="80"/>
+                                             value="#{personaMBean.persona.correo}" placeholder="CORREO" size="80"/>
                                 <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnRegistrar" icon="fa fa-save text-success" value="Guardar" title="Guardar"  
-                                                     oncomplete="PF('dlgNew').hide()" update=":msg,:formDataTable" actionListener="#{personaManagedBean.registrarPersona}" />
+                                                     oncomplete="PF('dlgNew').hide()" update=":msg,:formDataTable" actionListener="#{personaMBean.registrarPersona}" />
                                     <p:commandButton id="btnCancelarRegistro"  icon="fa fa-remove text-danger" value="Cancelar" title="Cancelar" oncomplete="PF('dlgNew').hide()" update="formNew" immediate="true"/>
                                 </f:facet>
                             </h:panelGrid>
@@ -118,41 +118,41 @@
                                   modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
                             <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">                                                     
                                 <h:outputLabel/>
-                                <h:inputHidden value="#{personaManagedBean.persona.idpersona}" />
+                                <h:inputHidden value="#{personaMBean.persona.idpersona}" />
                                 <h:outputText value="Nombre: " />
                                 <p:inputText id="txt_edit_nombre" required="true" placeholder="INGRESE NOMBRE" 
-                                             value="#{personaManagedBean.persona.nombres}" size="30"/>
+                                             value="#{personaMBean.persona.nombres}" size="30"/>
                                 <h:outputText value="Apellido Paterno: " />
                                 <p:inputText id="txt_edit_apPaterno" required="true" placeholder="INGRESE APELLIDO PATERNO" 
-                                             value="#{personaManagedBean.persona.apPaterno}" size="30"/>
+                                             value="#{personaMBean.persona.apPaterno}" size="30"/>
                                 <h:outputText value="Apellido Materno: " />
                                 <p:inputText id="txt_edit_apMaterno" required="true" placeholder="INGRESE APELLIDO MATERNO" 
-                                             value="#{personaManagedBean.persona.apMaterno}" size="30"/>
+                                             value="#{personaMBean.persona.apMaterno}" size="30"/>
                                 <h:outputText value="DNI: " />
                                 <p:inputText id="txt_edit_dni" required="true" placeholder="INGRESE DNI" 
-                                             value="#{personaManagedBean.persona.dni}" size="10"/>
+                                             value="#{personaMBean.persona.dni}" size="10"/>
                                 <h:outputText value="Sexo: " />                                
-                                <p:selectOneRadio id="rd_edit_Sexo" value="#{personaManagedBean.persona.sexo}">
+                                <p:selectOneRadio id="rd_edit_Sexo" value="#{personaMBean.persona.sexo}">
                                     <f:selectItem itemLabel="Masculino" itemValue="0" />
                                     <f:selectItem itemLabel="Femenino" itemValue="1" />
                                 </p:selectOneRadio>
                                 <h:outputText value="Teléfono: " />
                                 <p:inputText id="txt_edit_telefono" placeholder="INGRESE TELÉFONO FIJO" 
-                                             value="#{personaManagedBean.persona.telefono}" size="10"/>
+                                             value="#{personaMBean.persona.telefono}" size="10"/>
                                 <h:outputText value="Celular: " />
                                 <p:inputText id="txt_edit_cel1" placeholder="INGRESE CELULAR" 
-                                             value="#{personaManagedBean.persona.celular1}" size="10"/>
+                                             value="#{personaMBean.persona.celular1}" size="10"/>
                                 <h:outputText value="Celular: " />
                                 <p:inputText id="txt_edit_cel2" placeholder="INGRESE CELULAR" 
-                                             value="#{personaManagedBean.persona.celular2}" size="10"/>
+                                             value="#{personaMBean.persona.celular2}" size="10"/>
                                 <h:outputText value="Correo: " />
                                 <p:inputText id="txt_edit_correo" placeholder="INGRESE CORREO ELECTRÓNICO" 
-                                             value="#{personaManagedBean.persona.correo}" size="30"/>                                
+                                             value="#{personaMBean.persona.correo}" size="30"/>                                
                                 <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
                                                      oncomplete="PF('dlgEdit').hide()" icon="fa fa-save text-success" 
-                                                     title="Guardar" value="Guardar" actionListener="#{personaManagedBean.actualizarPersona(actionEvent)}"/>
+                                                     title="Guardar" value="Guardar" actionListener="#{personaMBean.actualizarPersona(actionEvent)}"/>
                                     <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide()" 
                                                      icon="fa fa-remove text-danger" title="Cancelar" value="Cancelar" immediate="true"/>
                                 </f:facet>
@@ -166,9 +166,9 @@
                         <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
                                          header="Eliminar Registro" showEffect="fade" 
                                          hideEffect="explode" widgetVar="dlgDelete" closable="false">
-                            <h:inputHidden value="#{personaManagedBean.persona.idpersona}" />
+                            <h:inputHidden value="#{personaMBean.persona.idpersona}" />
                             <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
-                                             icon="fa fa-save text-success" oncomplete="PF('dlgDelete').hide()" actionListener="#{personaManagedBean.eliminarPersona}"/>
+                                             icon="fa fa-save text-success" oncomplete="PF('dlgDelete').hide()" actionListener="#{personaMBean.eliminarPersona}"/>
 
                             <p:commandButton id="btnCancel" value="Cancelar" icon="fa fa-remove text-danger" oncomplete="PF('dlgDelete').hide()" />
 
@@ -180,34 +180,34 @@
                                 <h:panelGrid  columns="2" cellpadding="3">
                                     
                                     <h:outputText value="Id:" />
-                                    <h:outputText value="#{personaManagedBean.persona.idpersona}" />
+                                    <h:outputText value="#{personaMBean.persona.idpersona}" />
 
                                     <h:outputText value="Nombres:" />
-                                    <h:outputText value="#{personaManagedBean.persona.nombres}" />
+                                    <h:outputText value="#{personaMBean.persona.nombres}" />
 
                                     <h:outputText value="Apellido Paterno:" />
-                                    <h:outputText value="#{personaManagedBean.persona.apPaterno}" />
+                                    <h:outputText value="#{personaMBean.persona.apPaterno}" />
 
                                     <h:outputText value="Apellido Materno:" />
-                                    <h:outputText value="#{personaManagedBean.persona.apMaterno}" />
+                                    <h:outputText value="#{personaMBean.persona.apMaterno}" />
                                     
                                     <h:outputText value="DNI:" />
-                                    <h:outputText value="#{personaManagedBean.persona.dni}" />
+                                    <h:outputText value="#{personaMBean.persona.dni}" />
                                     
                                     <h:outputText value="Sexo:" />
-                                    <h:outputText value="#{personaManagedBean.persona.sexo}" />
+                                    <h:outputText value="#{personaMBean.persona.sexo}" />
                                     
                                     <h:outputText value="Teléfono:" />
-                                    <h:outputText value="#{personaManagedBean.persona.telefono}" />
+                                    <h:outputText value="#{personaMBean.persona.telefono}" />
                                     
                                     <h:outputText value="Celular 1:" />
-                                    <h:outputText value="#{personaManagedBean.persona.celular1}" />
+                                    <h:outputText value="#{personaMBean.persona.celular1}" />
                                     
                                     <h:outputText value="Celular 2:" />
-                                    <h:outputText value="#{personaManagedBean.persona.celular2}" />
+                                    <h:outputText value="#{personaMBean.persona.celular2}" />
                                     
                                     <h:outputText value="Correo:" />
-                                    <h:outputText value="#{personaManagedBean.persona.correo}" />
+                                    <h:outputText value="#{personaMBean.persona.correo}" />
                                 </h:panelGrid>
                             </p:outputPanel>
                         </p:dialog>

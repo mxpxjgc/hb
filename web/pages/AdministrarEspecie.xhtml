@@ -65,7 +65,7 @@
                                 <h:outputLabel for="cbx_genero" value="G&eacute;nero:" />
                                 <p:selectOneMenu id="cbx_genero" value="#{especieMBean.especie.genero.idgenero}" style="width: 388px">
                                     <f:selectItem itemLabel="--Seleccione--" />
-                                    <f:selectItems value="#{generoManagedBean.selectOneItemsGenero}" />
+                                    <f:selectItems value="#{generoMBean.selectOneItemsGenero}" />
                                 </p:selectOneMenu>
                                 <h:outputLabel for="txt_denominacion" value="Denominaci&oacute;n:" />                            
                                 <p:inputText id="txt_denominacion" label="Denominaci&oacute;n" placeholder="DENOMINACI&Oacute;N"
@@ -85,7 +85,7 @@
                                 <h:outputLabel for="cbx_habito" value="Hábito" />
                                 <p:selectOneMenu id="cbx_habito" value="#{especieMBean.especie.habito.idhabito}" style="width: 388px">
                                     <f:selectItem itemLabel="--Seleccione--" />
-                                    <f:selectItems value="#{habitoManagedBean.selectOneItemsHabito}" />
+                                    <f:selectItems value="#{habitoMBean.selectOneItemsHabito}" />
                                 </p:selectOneMenu>
                                 <h:outputLabel for="txt_descripcion" value="Descripción:" />                            
                                 <p:inputText id="txt_descripcion" label="Descripción:" placeholder="DESCRIPCIÓN"
@@ -111,7 +111,7 @@
                                 <h:outputLabel for="cbx_edit_genero" value="G&eacute;nero:" />
                                 <p:selectOneMenu id="cbx_edit_genero" value="#{especieMBean.especie.genero.idgenero}" style="width: 388px">
                                     <f:selectItem itemLabel="--Seleccione--" />
-                                    <f:selectItems value="#{generoManagedBean.selectOneItemsGenero}" />
+                                    <f:selectItems value="#{generoMBean.selectOneItemsGenero}" />
                                 </p:selectOneMenu>
                                 <h:outputLabel for="txt_edit_denominacion" value="Denominación:" />                            
                                 <p:inputText id="txt_edit_denominacion" required="true" label="Denaminación" placeholder="DENOMINACIÓN"
@@ -132,7 +132,7 @@
                                 <h:outputLabel for="cbx_edit_habito" value="Hábito:" />
                                 <p:selectOneMenu id="cbx_edit_habito" value="#{especieMBean.especie.habito.idhabito}" style="width: 388px">
                                     <f:selectItem itemLabel="--Seleccione--" />
-                                    <f:selectItems value="#{habitoManagedBean.selectOneItemsHabito}" />
+                                    <f:selectItems value="#{habitoMBean.selectOneItemsHabito}" />
                                 </p:selectOneMenu>
                                 <h:outputLabel for="txt_edit_descripcion" value="Descripción:" />                            
                                 <p:inputText id="txt_edit_descripcion" label="Descripción" placeholder="DESCRIPCIÓN"
@@ -158,7 +158,7 @@
                             <h:inputHidden value="#{especieMBean.especie.idespecie}" />
                             <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
                                              icon="fa fa-save text-success" oncomplete="PF('dlgDelete').hide()" 
-                                             actionListener="#{generoManagedBean.eliminarGenero()}"/>
+                                             actionListener="#{generoMBean.eliminarGenero()}"/>
 
                             <p:commandButton id="btnCancel" value="Cancelar" styleClass="ui-confirmdialog-no" 
                                              icon="fa fa-remove text-danger" oncomplete="PF('dlgDelete').hide()" />

@@ -31,7 +31,7 @@ import static org.jgc.herbarium.util.Utilitario.setTareaEvento;
  */
 @ManagedBean
 @SessionScoped
-public class ProvinciaManagedBean {
+public class ProvinciaMBean {
 
     @ManagedProperty(value = "#{provinciaBL}")
     private ProvinciaBL provinciaBL;
@@ -45,7 +45,7 @@ public class ProvinciaManagedBean {
     private List<Provincia> listaProvincia = new LinkedList<>();
     private List<SelectItem> selectOneItemsProvincia;
 
-    public ProvinciaManagedBean() {
+    public ProvinciaMBean() {
 
     }
 

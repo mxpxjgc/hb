@@ -15,11 +15,11 @@
                 <p:panel id="pnl_adminGenero" header="Administrar G&eacute;nero" styleClass="container">
                     <h:form id="formBtnNew">
                         <p:commandButton id="btnNew" update=":formNew" oncomplete="PF('dlgNew').show();" icon="fa fa-file" title="Nuevo"
-                                         value="Nuevo" actionListener="#{generoManagedBean.limpiar()}"/>                  
+                                         value="Nuevo" actionListener="#{generoMBean.limpiar()}"/>                  
                     </h:form>
 
                     <h:form id="formDataTable" >
-                        <p:dataTable id="lista" value="#{generoManagedBean.listaGenero}" var="generoItem"
+                        <p:dataTable id="lista" value="#{generoMBean.listaGenero}" var="generoItem"
                                      paginator="true" rows="10" paginatorPosition="bottom"
                                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                                      rowsPerPageTemplate="10,15,20">
@@ -46,13 +46,13 @@
                             </p:column>
                             <p:column style="width:6%;text-align: center">
                                 <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" icon="fa fa-edit" title="Editar">
-                                    <f:setPropertyActionListener value="#{generoItem}" target="#{generoManagedBean.genero}" />
+                                    <f:setPropertyActionListener value="#{generoItem}" target="#{generoMBean.genero}" />
                                 </p:commandButton>                            
                             </p:column>
                             <p:column style="width:6%;text-align: center">
                                 <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" immediate="True"
                                                  icon="fa fa-trash" title="Eliminar">
-                                    <f:setPropertyActionListener value="#{generoItem}" target="#{generoManagedBean.genero}" />          
+                                    <f:setPropertyActionListener value="#{generoItem}" target="#{generoMBean.genero}" />          
                                 </p:commandButton>                                                        
 
                             </p:column>
@@ -65,22 +65,22 @@
                             <h:panelGrid id="gridNew" columns="2" cellpadding="3">
 
                                 <h:outputLabel for="cbx_familia" value="Familia:" />
-                                <p:selectOneMenu id="cbx_familia" value="#{generoManagedBean.genero.familia.idfamilia}" style="width: 388px">
+                                <p:selectOneMenu id="cbx_familia" value="#{generoMBean.genero.familia.idfamilia}" style="width: 388px">
                                     <f:selectItem itemLabel="--Seleccione--" />
-                                    <f:selectItems value="#{familiaManagedBean.selectOneItemsFamilia}" />
+                                    <f:selectItems value="#{familiaMBean.selectOneItemsFamilia}" />
                                 </p:selectOneMenu>
                                 <h:outputLabel for="txt_denominacion" value="Denominaci&oacute;n:" />                            
                                 <p:inputText id="txt_denominacion" label="Denominaci&oacute;n" placeholder="DENOMINACI&Oacute;N"
-                                             value="#{generoManagedBean.genero.denominacion}" size="60"/>
+                                             value="#{generoMBean.genero.denominacion}" size="60"/>
 
                                 <h:outputLabel for="txt_abreviatura" value="Abreviatura:" />                            
                                 <p:inputText id="txt_abreviatura" label="Abreviatura" placeholder="ABREVIATURA"
-                                                 value="#{generoManagedBean.genero.abreviatura}"/>
+                                                 value="#{generoMBean.genero.abreviatura}"/>
                                 <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnRegistrar" update=":formDataTable, :msg"
                                                      oncomplete="PF('dlgNew').hide()" icon="fa fa-save text-success" 
-                                                     value="Guardar" title="Guardar" actionListener="#{generoManagedBean.registrarGenero}"/>
+                                                     value="Guardar" title="Guardar" actionListener="#{generoMBean.registrarGenero}"/>
                                     <p:commandButton id="btnCancelarRegistro"  oncomplete="PF('dlgNew').hide()" immediate="true"
                                                      icon="fa fa-remove text-danger" value="Cancelar" title="Cancelar"/>
                                 </f:facet>
@@ -94,24 +94,24 @@
 
                             <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">
                                 <h:outputLabel/>
-                                <h:inputHidden value="#{generoManagedBean.genero.idgenero}" />
+                                <h:inputHidden value="#{generoMBean.genero.idgenero}" />
                                 <h:outputLabel for="cbx_edit_familia" value="Familia" />
-                                <p:selectOneMenu id="cbx_edit_familia" value="#{generoManagedBean.genero.familia.idfamilia}" style="width: 388px">
+                                <p:selectOneMenu id="cbx_edit_familia" value="#{generoMBean.genero.familia.idfamilia}" style="width: 388px">
                                     <f:selectItem itemLabel="--Seleccione--" itemDisabled="true"/>
-                                    <f:selectItems value="#{familiaManagedBean.selectOneItemsFamilia}" />
+                                    <f:selectItems value="#{familiaMBean.selectOneItemsFamilia}" />
                                 </p:selectOneMenu>
                                 <h:outputLabel for="txt_edit_denominacion" value="Denominación:" />                            
                                 <p:inputText id="txt_edit_denominacion" required="true" label="Denaminación" placeholder="DENOMINACIÓN"
-                                             value="#{generoManagedBean.genero.denominacion}" size="60"/>
+                                             value="#{generoMBean.genero.denominacion}" size="60"/>
 
                                 <h:outputLabel for="txt_edit_abreviatura" value="Abreviatura:" />                            
                                 <p:inputText id="txt_edit_abreviatura" label="Abreviatura" placeholder="ABREVIATURA"
-                                                 value="#{generoManagedBean.genero.abreviatura}"/>                                
+                                                 value="#{generoMBean.genero.abreviatura}"/>                                
                                 <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
                                                      oncomplete="PF('dlgEdit').hide()" icon="fa fa-save text-success" 
-                                                     title="Guardar" value="Guardar" actionListener="#{generoManagedBean.actualizarGenero}"/>
+                                                     title="Guardar" value="Guardar" actionListener="#{generoMBean.actualizarGenero}"/>
                                     <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide()" immediate="true"
                                                      icon="fa fa-remove text-danger" title="Cancelar" value="Cancelar" />
                                 </f:facet>
@@ -125,10 +125,10 @@
                         <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
                                          header="Eliminar Registro" showEffect="fade" 
                                          hideEffect="explode" widgetVar="dlgDelete">
-                            <h:inputHidden value="#{generoManagedBean.genero.idgenero}" />
+                            <h:inputHidden value="#{generoMBean.genero.idgenero}" />
                             <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
                                              icon="fa fa-remove text-success" oncomplete="PF('dlgDelete').hide()" 
-                                             actionListener="#{generoManagedBean.eliminarGenero()}"/>
+                                             actionListener="#{generoMBean.eliminarGenero()}"/>
 
                             <p:commandButton id="btnCancel" value="Cancelar" styleClass="ui-confirmdialog-no" 
                                              icon="fa fa-remove text-danger" oncomplete="PF('dlgDelete').hide()" />

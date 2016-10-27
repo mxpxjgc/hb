@@ -20,7 +20,7 @@ import static org.jgc.herbarium.util.Utilitario.setTareaEvento;
 
 @ManagedBean
 @ViewScoped
-public class UsuarioManagedBean {
+public class UsuarioMBean {
     @ManagedProperty(value = "#{usuarioBL}")
     private UsuarioBL usuarioBL;
     

@@ -17,7 +17,7 @@ import static org.jgc.herbarium.util.Utilitario.setTareaEvento;
 
 @ManagedBean
 @RequestScoped
-public class FamiliaManagedBean {
+public class FamiliaMBean {
 
     @ManagedProperty(value = "#{familiaBL}")
     private FamiliaBL familiaBL;
@@ -28,7 +28,7 @@ public class FamiliaManagedBean {
     private List<Familia> listaFamilia = new LinkedList<>();
     private List<SelectItem> selectOneItemsFamilia;
 
-    public FamiliaManagedBean(){        
+    public FamiliaMBean(){        
     }
 
     public void registrarFamilia() {

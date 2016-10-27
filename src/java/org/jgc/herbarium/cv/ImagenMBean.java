@@ -19,7 +19,7 @@ import static org.jgc.herbarium.util.Utilitario.setTareaEvento;
 
 @ManagedBean
 @ViewScoped
-public class ImagenManagedBean {
+public class ImagenMBean {
     @ManagedProperty(value = "#{imagenBL}")
     private ImagenBL imagenBL;
     

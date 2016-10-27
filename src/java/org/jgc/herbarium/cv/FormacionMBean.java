@@ -18,7 +18,7 @@ import static org.jgc.herbarium.util.Utilitario.setTareaEvento;
 
 @ManagedBean
 @ViewScoped
-public class FormacionManagedBean {
+public class FormacionMBean {
     @ManagedProperty(value = "#{formacionBL}")
     private FormacionBL formacionBL;
     

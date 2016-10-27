@@ -18,7 +18,7 @@ import static org.jgc.herbarium.util.Utilitario.setTareaEvento;
 
 @ManagedBean
 @ViewScoped
-public class HabitoManagedBean {
+public class HabitoMBean {
     @ManagedProperty(value = "#{habitoBL}")
     private HabitoBL habitoBL;
     

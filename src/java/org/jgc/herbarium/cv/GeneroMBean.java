@@ -19,7 +19,7 @@ import static org.jgc.herbarium.util.Utilitario.setTareaEvento;
 
 @ManagedBean
 @ViewScoped
-public class GeneroManagedBean {
+public class GeneroMBean {
     @ManagedProperty(value = "#{generoBL}")
     private GeneroBL generoBL;
 
@@ -29,7 +29,7 @@ public class GeneroManagedBean {
     private List<Genero> listaGenero = new LinkedList<>();
     private List<SelectItem> selectOneItemsGenero;
 
-    public GeneroManagedBean(){        
+    public GeneroMBean(){        
     }
 
     public void registrarGenero() {

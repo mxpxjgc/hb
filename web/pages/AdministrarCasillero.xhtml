@@ -60,7 +60,7 @@
                                 <h:outputLabel for="cbx_gabinete" value="Gabinete" />
                                 <p:selectOneMenu id="cbx_gabinete" value="#{casilleroMBean.casillero.gabinete.idgabinete}" style="width: 388px">
                                     <f:selectItem itemLabel="--Seleccione--" />
-                                    <f:selectItems value="#{gabineteManagedBean.selectOneItemsGabinete}" />
+                                    <f:selectItems value="#{gabineteMBean.selectOneItemsGabinete}" />
                                 </p:selectOneMenu>
                                 <h:outputLabel for="txt_numero" value="Número: " />                            
                                 <p:inputText id="txt_numero" label="Número" placeholder="NÚMERO"
@@ -89,7 +89,7 @@
                                 <h:outputLabel for="cbx_edit_gabinete" value="Gabinete: " />
                                 <p:selectOneMenu id="cbx_edit_gabinete" value="#{casilleroMBean.casillero.gabinete.idgabinete}" style="width: 388px">
                                     <f:selectItem itemLabel="--Seleccione--" />
-                                    <f:selectItems value="#{gabineteManagedBean.selectOneItemsGabinete}" />
+                                    <f:selectItems value="#{gabinegabineteMBeantOneItemsGabinete}" />
                                 </p:selectOneMenu>
                                 <h:outputLabel for="txt_edit_numero" value="Número: " />                            
                                 <p:inputText id="txt_edit_numero" required="true" label="Número" placeholder="NÚMERO"

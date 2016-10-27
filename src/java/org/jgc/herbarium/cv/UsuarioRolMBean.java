@@ -11,7 +11,7 @@ import org.jgc.herbarium.bl.UsuarioRolBL;
 
 @ManagedBean
 @ViewScoped
-public class UsuarioRolManagedBean {
+public class UsuarioRolMBean {
     @ManagedProperty(value = "#{usuarioRolBL}")
     private UsuarioRolBL usuarioRolBL;
     

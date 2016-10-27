@@ -20,11 +20,11 @@
                                          title="Registrar Nueva Familia" 
                                          oncomplete="PF('dlgNew').show();" 
                                          update=":formNew:dlgNew" 
-                                         actionListener="#{familiaManagedBean.limpiar()}"/> 
+                                         actionListener="#{familiaMBean.limpiar()}"/> 
                     </h:form>                    
                     <h:form id="formDataTable">
                         <p:dataTable id="lista" 
-                                     value="#{familiaManagedBean.listaFamilia}" 
+                                     value="#{familiaMBean.listaFamilia}" 
                                      var="familiaItem"
                                      paginator="true" 
                                      rows="10" 
@@ -51,13 +51,13 @@
                             <p:column style="width:6%;text-align: center">
                                 <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" 
                                                  icon="fa fa-edit" title="Editar">
-                                    <f:setPropertyActionListener value="#{familiaItem}" target="#{familiaManagedBean.familia}" />
+                                    <f:setPropertyActionListener value="#{familiaItem}" target="#{familiaMBean.familia}" />
                                 </p:commandButton>                            
                             </p:column>
                             <p:column style="width:6%;text-align: center">
                                 <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" 
                                                  immediate="True" icon="fa fa-trash" title="Eliminar">
-                                    <f:setPropertyActionListener value="#{familiaItem}" target="#{familiaManagedBean.familia}" />                                    
+                                    <f:setPropertyActionListener value="#{familiaItem}" target="#{familiaMBean.familia}" />                                    
                                 </p:commandButton>                                
                             </p:column>
                         </p:dataTable>
@@ -69,14 +69,14 @@
                             <h:panelGrid id="gridNew" columns="2" cellpadding="3">
                                 <h:outputLabel for="denominacion" value="Familia: " />
                                 <p:inputText id="denominacion" required="true" label="Familia"
-                                             value="#{familiaManagedBean.familia.denominacion}" placeholder="FAMILIA" size="60"/>
+                                             value="#{familiaMBean.familia.denominacion}" placeholder="FAMILIA" size="60"/>
                                 <h:outputLabel for="abreviatura" value="Abreviatura: " />
                                 <p:inputText id="abreviatura" label="Abreviatura"
-                                             value="#{familiaManagedBean.familia.abreviatura}" placeholder="ABREVIATURA" size="60"/>
+                                             value="#{familiaMBean.familia.abreviatura}" placeholder="ABREVIATURA" size="60"/>
                                 <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnRegistrar" icon="fa fa-save text-success" value="Guardar" title="Guardar"  
-                                                     oncomplete="PF('dlgNew').hide()" update=":msg,:formDataTable" actionListener="#{familiaManagedBean.registrarFamilia}" />
+                                                     oncomplete="PF('dlgNew').hide()" update=":msg,:formDataTable" actionListener="#{familiaMBean.registrarFamilia}" />
                                     <p:commandButton id="btnCancelarRegistro"  icon="fa fa-remove text-danger" value="Cancelar" title="Cancelar" oncomplete="PF('dlgNew').hide()" update="formNew" immediate="true"/>
                                 </f:facet>
                             </h:panelGrid>
@@ -88,19 +88,19 @@
                                   modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
                             <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">                                                     
                                 <h:outputLabel/>
-                                <h:inputHidden value="#{familiaManagedBean.familia.idfamilia}" />
+                                <h:inputHidden value="#{familiaMBean.familia.idfamilia}" />
                                 <h:outputText value="Familia: " />
                                 <p:inputText id="txt_editar_denominacion_familia" required="true" placeholder="INGRESE FAMILIA" 
-                                             value="#{familiaManagedBean.familia.denominacion}" size="60"/>
+                                             value="#{familiaMBean.familia.denominacion}" size="60"/>
                                 <h:outputText value="Abreviatura: " />
                                 <p:inputText id="txt_editar_abreviatura_familia" placeholder="INGRESE ABREVIATURA" 
-                                             value="#{familiaManagedBean.familia.abreviatura}" size="60"/>
+                                             value="#{familiaMBean.familia.abreviatura}" size="60"/>
 
                                 <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
                                                      oncomplete="PF('dlgEdit').hide()" icon="fa fa-save text-success" 
-                                                     title="Guardar" value="Guardar" actionListener="#{familiaManagedBean.actualizarFamilia(actionEvent)}"/>
+                                                     title="Guardar" value="Guardar" actionListener="#{familiaMBean.actualizarFamilia(actionEvent)}"/>
                                     <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide()" 
                                                      icon="fa fa-remove text-danger" title="Cancelar" value="Cancelar" immediate="true"/>
                                 </f:facet>
@@ -114,9 +114,9 @@
                         <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
                                          header="Eliminar Registro" showEffect="fade" 
                                          hideEffect="explode" widgetVar="dlgDelete" closable="false">
-                            <h:inputHidden value="#{familiaManagedBean.familia.idfamilia}" />
+                            <h:inputHidden value="#{familiaMBean.familia.idfamilia}" />
                             <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
-                                             icon="fa fa-save text-success" oncomplete="PF('dlgDelete').hide()" actionListener="#{familiaManagedBean.eliminarFamilia}"/>
+                                             icon="fa fa-save text-success" oncomplete="PF('dlgDelete').hide()" actionListener="#{familiaMBean.eliminarFamilia}"/>
 
                             <p:commandButton id="btnCancel" value="Cancelar" icon="fa fa-remove text-danger" oncomplete="PF('dlgDelete').hide()" />
 

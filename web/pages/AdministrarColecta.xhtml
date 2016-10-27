@@ -76,9 +76,9 @@
                                     <f:selectItems value="#{dptoMBean.selectOneItemsDepartamento}" />
                                 </p:selectOneMenu>
                                 <h:outputLabel for="cbx_prov" value="Provincia: " />
-                                <p:selectOneMenu id="cbx_prov" value="#{provinciaManagedBean.provincia.idprovincia}" style="width: 388px">
+                                <p:selectOneMenu id="cbx_prov" value="#{provinciaMBean.provincia.idprovincia}" style="width: 388px">
                                     <f:selectItem itemLabel="--Seleccione--" />
-                                    <f:selectItems value="#{provinciaManagedBean.selectOneItemsProvincia}" />
+                                    <f:selectItems value="#{provinciaMBean.selectOneItemsProvincia}" />
                                 </p:selectOneMenu>
                                 <h:outputLabel for="cbx_distr" value="Distrito: " />
                                 <p:selectOneMenu id="cbx_distr" value="#{colectaMBean.colecta.distrito.iddistrito}" style="width: 388px">
