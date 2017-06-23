@@ -11,8 +11,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class Familia  implements java.io.Serializable {
-
-
      private Long idfamilia;
      private String denominacion;
      private String abreviatura;
@@ -64,10 +62,6 @@ public class Familia  implements java.io.Serializable {
     public void setGeneros(Set generos) {
         this.generos = generos;
     }
-
-
-
-
 }
 
 

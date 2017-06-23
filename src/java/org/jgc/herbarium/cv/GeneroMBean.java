@@ -98,8 +98,8 @@ public class GeneroMBean {
     @PostConstruct
     public void listarGenero() {
         setListaGenero(generoBL.listar(""));
-    } 
-    
+    }
+
     public GeneroBL getGeneroBL() {
         return generoBL;
     }

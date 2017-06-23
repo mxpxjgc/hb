@@ -12,7 +12,7 @@
 
             <ui:define name="content">
                 <p:growl id="msg" showDetail="true" life="3000"/>
-                <p:panel id="panelFamilia" header="ADMINISTRAR GABINETE" styleClass="container" style="width: 50%">
+                <p:panel id="panelGabinete" header="ADMINISTRAR GABINETE" styleClass="container" style="width: 80%">
                     <h:form id="formBtnNew">
                         <p:commandButton id="btnNew" 
                                          icon="fa fa-file"
@@ -24,7 +24,7 @@
                     </h:form>                    
                     <h:form id="formDataTable">
                         <p:dataTable id="lista" 
-                                     value="#{gabinegabineteMBeanGabinetes}" 
+                                     value="#{gabineteMBean.listaGabinetes}" 
                                      var="gabineteItem"
                                      paginator="true" 
                                      rows="10" 
@@ -34,33 +34,33 @@
                             <f:facet name="header">
                                 Gabinetes
                             </f:facet>
-                            <p:column style="width:8%; text-align: center" headerText="Nº">
+                            <p:column style="width:4%; text-align: center" headerText="Nº">
                                 <h:outputText value="#{gabineteItem.idgabinete}" />
                             </p:column>
-                            <p:column headerText="Gabinete">
-                                <h:outputText value="#{gabineteItem.nombre}"/>
+                            <p:column style="" headerText="Gabinete">
+                                <h:outputText value="#{gabineteItem.nombre}" />
                             </p:column>
-                            <p:column headerText="Código">
-                                <h:outputText value="#{gabineteItem.codigo}"/>
+                            <p:column style="" headerText="Código">
+                                <h:outputText value="#{gabineteItem.codigo}" />
                             </p:column>
-                            <p:column headerText="Descripción">
-                                <h:outputText value="#{gabineteItem.descripcion}"/>
+                            <p:column style="" headerText="Descripción">
+                                <h:outputText value="#{gabineteItem.descripcion}" />
                             </p:column>
                             <p:column style="width:10%;text-align: center">
                                 <h:outputLink value="/Herbarium/hb/pages/AdministrarCasillero.xhtml">
-                                    <h:outputText value="Casillero"/>
+                                    <h:outputText value="Casilleros"/>
                                 </h:outputLink>                         
                             </p:column>
-                            <p:column style="width:10%;text-align: center">
+                            <p:column style="width:6%;text-align: center">
                                 <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" 
                                                  icon="fa fa-edit" title="Editar">
-                                    <f:setPropertyActionListener value="#{gabineteItem}" target="#{gabineteManagabineteMBean/>
+                                    <f:setPropertyActionListener value="#{gabineteItem}" target="#{gabineteMBean.gabinete}" />
                                 </p:commandButton>                            
                             </p:column>
-                            <p:column style="width:10%;text-align: center">
+                            <p:column style="width:6%;text-align: center">
                                 <p:commandButton id="btnDelete" update=":formDelete" oncomplete="PF('dlgDelete').show();" 
                                                  immediate="True" icon="fa fa-trash" title="Eliminar">
-                                    <f:setPropertyActionListener value="#{gabineteItem}" target="#{gabineteManagedBeagabineteMBean                                
+                                    <f:setPropertyActionListener value="#{gabineteItem}" target="#{gabineteMBean.gabinete}" />                                    
                                 </p:commandButton>                                
                             </p:column>
                         </p:dataTable>
@@ -68,21 +68,22 @@
 
                     <h:form id="formNew">
                         <p:dialog header="Registrar Gabinete" widgetVar="dlgNew" id="dlgNew" modal="true"
-                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false" closeOnEscape="true">
+                                  showEffect="fade" hideEffect="explode" resizable="false" closable="false">
                             <h:panelGrid id="gridNew" columns="2" cellpadding="3">
                                 <h:outputLabel for="nombre" value="Nombre: " />
-                                <p:inputText id="nombre" required="true" label="Nombre"
-                                             value="#{gabineteManagedBean.gabigabineteMBeanholder="NOMBRE" size="60"/>
-                                <h:outputLabel for="codigo" value="Codigo: " />
-                                <p:inputText id="codigo" required="true" label="Codigo"
-                                             value="#{gabineteManagedBean.gabinete.cgabineteMBean="CODIGO" size="60"/> 
+                                <p:inputText id="nombre"  label="Nombre"
+                                             value="#{gabineteMBean.gabinete.nombre}" placeholder="NOMBRE" size="60"/>
+                                <h:outputLabel for="codigo" value="Código: " />
+                                <p:inputText id="codigo" required="true" label="codigo"
+                                             value="#{gabineteMBean.gabinete.codigo}" placeholder="CODIGO" size="20"/>
                                 <h:outputLabel for="descripcion" value="Descripción: " />
-                                <p:inputText id="descripcion" required="true" label="Descripción"
-                                             value="#{gabineteManagedBean.gabinete.descripgabineteMBean"DESCRIPCIÓN" size="60"/>   
+                                <p:inputText id="descripcion" label="descripcion"
+                                             value="#{gabineteMBean.gabinete.descripcion}" placeholder="DESCRIPCION" size="60"/>
                                 <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnRegistrar" icon="fa fa-save text-success" value="Guardar" title="Guardar"  
-                                                     oncomplete="PF('dlgNew').hide()" update=":msg,:formDataTable" actionListener="#{gabineteManagedBean.registrarGabinete}" />gabineteMBean                  <p:commandButton id="btnCancelarRegistro"  icon="fa fa-remove text-danger" value="Cancelar" title="Cancelar" oncomplete="PF('dlgNew').hide()" update="formNew" immediate="true"/>
+                                                     oncomplete="PF('dlgNew').hide()" update=":msg,:formDataTable" actionListener="#{gabineteMBean.registrarGabinete}" />
+                                    <p:commandButton id="btnCancelarRegistro"  icon="fa fa-remove text-danger" value="Cancelar" title="Cancelar" oncomplete="PF('dlgNew').hide()" update="formNew" immediate="true"/>
                                 </f:facet>
                             </h:panelGrid>
                         </p:dialog>
@@ -93,20 +94,22 @@
                                   modal="true" showEffect="fade" hideEffect="explode" resizable="false" closable="false">
                             <h:panelGrid id="gridEdit" columns="2"  cellpadding="3">                                                     
                                 <h:outputLabel/>
-                                <h:inputHidden value="#{gabineteManagedBean.gabinete.idgabinete}" />
-   gabineteMBean          <h:outputText value="Nombre: " />
-                                <p:inputText id="txt_editar_nombre" placeholder="INGRESE NOMBRE" 
-                                             value="#{gabineteManagedBean.gabinete.ngabineteMBean
+                                <h:inputHidden value="#{gabineteMBean.gabinete.idgabinete}" />
+                                <h:outputText value="Nombre: " />
+                                <p:inputText id="txt_editar_nombre_gab" required="true" placeholder="INGRESE NOMBRE" 
+                                             value="#{gabineteMBean.gabinete.nombre}" size="60"/>
                                 <h:outputText value="Código: " />
-                                <p:inputText id="txt_editar_codigo" placeholder="INGRESE CÓDIGO" 
-                                             value="#{gabineteManagedBean.gabinete.codigo}" sizegabineteMBean                     <h:outputText value="Descripción: " />
-                                <p:inputText id="txt_editar_descripcion" placeholder="INGRESE DESCRIPCIÓN" 
-                                             value="#{gabineteManagedBean.gabinete.descripcion}" size="60"/>gabineteMBean              <f:facet name="footer">
+                                <p:inputText id="txt_editar_codigo_gab" placeholder="INGRESE CÓDIGO" 
+                                             value="#{gabineteMBean.gabinete.codigo}" size="20"/>
+                                <h:outputText value="Descripción: " />
+                                <p:inputText id="txt_editar_desc_gab" placeholder="INGRESE DESCRIPCIÓN" 
+                                             value="#{gabineteMBean.gabinete.descripcion}" size="60"/>
+                                <f:facet name="footer">
                                     <p:separator/>
                                     <p:commandButton id="btnActualizar" update=":formDataTable, :msg" 
                                                      oncomplete="PF('dlgEdit').hide()" icon="fa fa-save text-success" 
-                                                     title="Guardar" value="Guardar" actionListener="#{gabineteManagedBean.actualizarGabinete}"/>
-                             gabineteMBeantton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide()" 
+                                                     title="Guardar" value="Guardar" actionListener="#{gabineteMBean.actualizarGabinete(actionEvent)}"/>
+                                    <p:commandButton id="btnCancelarActualizar"  oncomplete="PF('dlgEdit').hide()" 
                                                      icon="fa fa-remove text-danger" title="Cancelar" value="Cancelar" immediate="true"/>
                                 </f:facet>
 
@@ -119,11 +122,11 @@
                         <p:confirmDialog id="confirmDialog" message="¿Esta seguro que desea eliminar el registro?" 
                                          header="Eliminar Registro" showEffect="fade" 
                                          hideEffect="explode" widgetVar="dlgDelete" closable="false">
-                            <h:inputHidden value="#{gabineteManagedBean.gabinete.idgabinete}" />
-                           gabineteMBeand="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
-                                             icon="fa fa-save text-success" oncomplete="PF('dlgDelete').hide()" actionListener="#{gabineteManagedBean.eliminarGabinete}"/>
+                            <h:inputHidden value="#{gabineteMBean.gabinete.idgabinete}" />
+                            <p:commandButton id="btnConf" update=":formDataTable, :msg" value="Aceptar" styleClass="ui-confirmdialog-yes" 
+                                             icon="fa fa-save text-success" oncomplete="PF('dlgDelete').hide()" actionListener="#{gabineteMBean.eliminarGabinete}"/>
 
-                            <p:commandButtgabineteMBeanalue="Cancelar" icon="fa fa-remove text-danger" oncomplete="PF('dlgDelete').hide()" />
+                            <p:commandButton id="btnCancel" value="Cancelar" icon="fa fa-remove text-danger" oncomplete="PF('dlgDelete').hide()" />
 
                         </p:confirmDialog>
                     </h:form>

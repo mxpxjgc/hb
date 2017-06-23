@@ -22,25 +22,27 @@
                     <p:growl id="messages"/>
                     <p:menubar>
                         <p:menuitem value="Inicio" url="/hb/pages/AdministrarColecta.xhtml" icon="fa fa-university"/>
-                        <p:submenu label="Administrar Taxones" icon="fa fa-tree">
-                            <p:menuitem value="Administrar Familias" url="/hb/pages/AdministrarFamilia.xhtml" icon="fa fa-gear" />
-                            <p:menuitem value="Administrar Géneros" url="/hb/pages/AdministrarGenero.xhtml" icon="fa fa-gear" />
-                            <p:menuitem value="Administrar Especies" url="/hb/pages/AdministrarEspecie.xhtml" icon="fa fa-gear" />                            
-                        </p:submenu>
+                        <p:submenu label="Administración" icon="fa fa-gear">
+                            <p:submenu label="Administrar Taxones" icon="fa fa-tree">
+                                <p:menuitem value="Administrar Familias" url="/hb/pages/AdministrarFamilia.xhtml" icon="fa fa-gear" />
+                                <p:menuitem value="Administrar Géneros" url="/hb/pages/AdministrarGenero.xhtml" icon="fa fa-gear" />
+                                <p:menuitem value="Administrar Especies" url="/hb/pages/AdministrarEspecie.xhtml" icon="fa fa-gear" />                            
+                            </p:submenu>
 
-                        <p:menuitem value="Administrar Hábito" url="/hb/pages/AdministrarHabito.xhtml" icon="fa fa-leaf"/>  
-                        <p:menuitem value="Administrar Formación Vegetal" url="/hb/pages/AdministrarFormacion.xhtml" icon="fa fa-leaf"/>  
+                            <p:menuitem value="Administrar Hábito" url="/hb/pages/AdministrarHabito.xhtml" icon="fa fa-leaf"/>  
+                            <p:menuitem value="Administrar Formación Vegetal" url="/hb/pages/AdministrarFormacion.xhtml" icon="fa fa-leaf"/>  
 
-                        <p:submenu label="Administrar Gabinetes" icon="fa fa-windows">
-                            <p:menuitem value="Administrar Gabinetes" url="/hb/pages/AdministrarGabinete.xhtml" icon="fa fa-windows"/>
-                            <p:menuitem value="Administrar Casilleros" url="/hb/pages/AdministrarCasillero.xhtml" icon="fa fa-table"/>                                
-                        </p:submenu>
-                            
-                        <p:submenu label="Administrar Ubigeo" icon="fa fa-globe">
-                            <p:menuitem value="Administrar Departamento" url="/hb/pages/AdministrarDepartamento.xhtml" icon="fa fa-globe"/>
-                            <p:menuitem value="Administrar Provincia" url="/hb/pages/AdministrarProvincia.xhtml" icon="fa fa-globe"/>                                
-                            <p:menuitem value="Administrar Distrito" url="/hb/pages/AdministrarDistrito.xhtml" icon="fa fa-globe"/>                                
-                            <p:menuitem value="Administrar Personas" url="/hb/pages/AdministrarPersona.xhtml" icon="fa fa-users"/>                                
+                            <p:submenu label="Administrar Gabinetes" icon="fa fa-windows">
+                                <p:menuitem value="Administrar Gabinetes" url="/hb/pages/AdministrarGabinete.xhtml" icon="fa fa-windows"/>
+                                <p:menuitem value="Administrar Casilleros" url="/hb/pages/AdministrarCasillero.xhtml" icon="fa fa-table"/>                                
+                            </p:submenu>
+
+                            <p:submenu label="Administrar Ubigeo" icon="fa fa-globe">
+                                <p:menuitem value="Administrar Departamento" url="/hb/pages/AdministrarDepartamento.xhtml" icon="fa fa-globe"/>
+                                <p:menuitem value="Administrar Provincia" url="/hb/pages/AdministrarProvincia.xhtml" icon="fa fa-globe"/>                                
+                                <p:menuitem value="Administrar Distrito" url="/hb/pages/AdministrarDistrito.xhtml" icon="fa fa-globe"/>                                
+                                <p:menuitem value="Administrar Personas" url="/hb/pages/AdministrarPersona.xhtml" icon="fa fa-users"/>                                
+                            </p:submenu>
                         </p:submenu>
                         <f:facet name="options" >
                             <p:inputText style="margin-right:10px" placeholder="Buscar"/>
