@@ -18,7 +18,9 @@ import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import org.jgc.herbarium.be.Departamento;
+import org.jgc.herbarium.be.Provincia;
 import org.jgc.herbarium.bl.DepartamentoBL;
+import org.jgc.herbarium.bl.ProvinciaBL;
 import org.jgc.herbarium.util.Tarea;
 import static org.jgc.herbarium.util.Utilitario.setTareaEvento;
 
@@ -36,6 +38,12 @@ public class DptoMBean {
     @ManagedProperty(value = "#{departamento}")
     private Departamento departamento;
     
+    @ManagedProperty(value = "#{provinciaBL}")
+    private ProvinciaBL provinciaBL;
+
+    @ManagedProperty(value = "#{provincia}")
+    private Provincia provincia;
+
     private UIData depDataTable;
     private Departamento depSelected;
 
@@ -100,6 +108,10 @@ public class DptoMBean {
         setListaDepartamento(departamentoBL.listar());
     }
 
+    public void listarProvincias(long id) {
+        System.out.println("id " + id);
+    }
+
     public void limpiar() {
         this.departamento.setIddepartamento(Long.MIN_VALUE);
         this.departamento.setDenominacion("");
@@ -157,5 +169,21 @@ public class DptoMBean {
 
     public void setDepSelected(Departamento depSelected) {
         this.depSelected = depSelected;
+    }
+
+    public ProvinciaBL getProvinciaBL() {
+        return provinciaBL;
+    }
+
+    public void setProvinciaBL(ProvinciaBL provinciaBL) {
+        this.provinciaBL = provinciaBL;
+    }
+
+    public Provincia getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(Provincia provincia) {
+        this.provincia = provincia;
     }
 }

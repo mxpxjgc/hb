@@ -18,6 +18,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
+import javax.faces.view.ViewScoped;
 import javax.servlet.http.HttpSession;
 import org.jgc.herbarium.be.Departamento;
 import org.jgc.herbarium.be.Provincia;
@@ -30,7 +31,7 @@ import static org.jgc.herbarium.util.Utilitario.setTareaEvento;
  * @author PROFESIONAL
  */
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class ProvinciaMBean {
 
     @ManagedProperty(value = "#{provinciaBL}")
@@ -101,17 +102,16 @@ public class ProvinciaMBean {
 
     @PostConstruct
     public void listarProvincia() {
-        System.out.println("ID departamento: " + recuperarID());
-        setListaProvincia(getProvinciaBL().listar(recuperarID()));
+        setListaProvincia(provinciaBL.listar(""));
     }
 
-    public long recuperarID() {
-        System.out.println("Entra a Recuperar ID");
-        //FacesContext context = FacesContext.getCurrentInstance();
-        //return (long) context.getExternalContext().getSessionMap().get("idDepSession");
-        Departamento dep = (Departamento)departamentoMB.getDepSelected();
-        return dep.getIddepartamento();
-    }
+//    public long recuperarID() {
+//        System.out.println("Entra a Recuperar ID");
+//        //FacesContext context = FacesContext.getCurrentInstance();
+//        //return (long) context.getExternalContext().getSessionMap().get("idDepSession");
+//        Departamento dep = (Departamento)departamentoMB.getDepSelected();
+//        return dep.getIddepartamento();
+//    }
 
     public void limpiar() {
         this.provincia.setIdprovincia(Long.MIN_VALUE);

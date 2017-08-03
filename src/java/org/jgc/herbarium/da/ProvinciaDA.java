@@ -62,5 +62,9 @@ public class ProvinciaDA extends AbstractDA<Provincia>{
     public long id() {
         return maxId(Provincia.class);
     }
+
+    public List<Provincia> listarxDpto(long id) {
+        return listar(id);
+    }
     
 }

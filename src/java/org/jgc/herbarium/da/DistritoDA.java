@@ -62,5 +62,9 @@ public class DistritoDA extends AbstractDA<Distrito>{
     public long id() {
         return maxId(Distrito.class);
     }
+
+    public List<Distrito> listarxProv(long id) {
+        return listar(id);
+    }
     
 }

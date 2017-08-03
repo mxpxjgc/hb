@@ -7,6 +7,7 @@ package org.jgc.herbarium.bl;
 
 import java.util.List;
 import org.jgc.herbarium.be.Distrito;
+import org.jgc.herbarium.be.Provincia;
 import org.jgc.herbarium.da.DistritoDA;
 import org.jgc.herbarium.util.AbstractBL;
 import org.jgc.herbarium.util.AbstractDA;
@@ -78,6 +79,10 @@ public class DistritoBL extends AbstractBL<Distrito>{
     @Override
     public long id() {
         return maxId();
+    }
+
+    public List<Distrito> listarxProv(long id) {
+        return dao.listarxProv(id);
     }
     
 }

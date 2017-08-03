@@ -78,5 +78,9 @@ public class ProvinciaBL extends AbstractBL<Provincia>{
     public long id() {
         return maxId();
     }
+
+    public List<Provincia> listarxDpto(long id) {
+        return dao.listarxDpto(id);
+    }
     
 }
