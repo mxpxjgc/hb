@@ -52,7 +52,7 @@ public class UbigeoMBean {
     }
 
     public void listarProvincias() {
-        if (distrito.getProvincia().getDepartamento() != null) {
+        if (distrito.getProvincia().getDepartamento().getIddepartamento() != 0) {
             System.out.println("id depa " + distrito.getProvincia().getDepartamento().getIddepartamento());
             long id = distrito.getProvincia().getDepartamento().getIddepartamento();
             setListaProvincia(provinciaBL.listarxDpto(id));
