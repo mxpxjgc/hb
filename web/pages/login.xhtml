@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <body>
+
+        <ui:composition template="./../template/layoutLogin.xhtml">
+
+            <ui:define name="content">
+
+                <div class="contenedor">
+                    <div class="panel">
+                        <div class="box">
+                            <p:growl id="growl" showDetail="true" life="3000" />
+                            <h:form id="formLogin">
+                                <p:panel id="basic" header="Ingrese Usuario y Contraseña" >
+                                    <h:panelGrid columns="2" cellpadding="6">
+                                        <h:outputLabel for="txf_usuario" value="Usuario: " />
+                                        <p:inputText id="txf_usuario"  required="true" label="Usuario" size="26"
+                                                     value="#{loginController.nombreUsuario}"/>
+
+                                        <h:outputLabel for="password" value="Contraseña: " />
+                                        <p:password id="password"  required="true" label="Contraseña" size="26"
+                                                    value="#{loginController.password}"/>
+                                        <f:facet name="footer">
+                                            <p:separator />
+                                            <p:commandButton value="Registrese" icon="icon-add" ajax="false" action="registrarUsuario" immediate="true"/>
+                                            <p:commandButton value="Iniciar Sesion" update=":growl" icon="icon-ingresar" style="float: right;"
+                                                             action="#{loginControler.login()}"/>
+                                        </f:facet>
+                                    </h:panelGrid>
+                                </p:panel>
+                            </h:form> 
+                            
+                        </div>
+                        <span class="copy">Copyright &copy; 2017  HerbariumHuamangensis</span>	
+                    </div>
+                </div>
+            </ui:define>
+
+        </ui:composition>
+
+    </body>
+</html>

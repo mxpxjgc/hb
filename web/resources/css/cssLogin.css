@@ -1,0 +1,86 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 04-nov-2014, 22:59:57
+    Author     : JorgeLuis
+*/
+html,body{
+    margin:0px;
+    height:100%;
+}
+#container{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    margin: 0px;
+}
+#top{
+    position: relative;
+    height: 10%;
+    text-align: center;
+    margin: 0px 0px 0px 0px;
+}
+#content{
+    position: relative;
+    height: 85%;
+    background-color:#ffffff;
+    margin: 0px 0px 0px 0px;
+}
+#bottom{
+    position: relative;
+    height: 4%;
+    margin: 0px 0px 0px 0px;
+    text-align: center;
+}
+
+.contenedor {
+    position: absolute; /*Posicionamiento absoluto*/
+    top: 50%; /*Desde arriba, colocar al 50% de la pantalla*/
+    left: 50%; /*Desde la izquierda, colocar al 50% de la pantalla*/
+    height: 350px; /*Le ponemos el valor del alto*/
+    width: 700px; /*Le ponemos el valor del ancho*/
+    margin-top: -175px; /*Restamos la mitad de alto para centrarlo verticalmente*/
+    margin-left: -350px;
+    border-radius: 20px; 
+    -moz-border-radius: 20px; 
+    -webkit-border-radius: 20px; 
+}
+.panel { 
+    width:320px; 
+    height:220px; 
+    position:absolute; 
+    top:50%; 
+    left:50%; 
+    margin-top:-110px;
+    margin-left:-160px;
+}
+.box { 
+    width:320px; 
+    overflow:hidden; 
+    padding:0; 
+    background:#fff; 
+    border:1px solid #d5d5d5; 
+    border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    -webkit-border-radius: 5px;
+}
+.copy { 
+    float:right; 
+    color:#9eabae; 
+    font-size:12px; 
+    margin:5px 5px 0 0; 
+    text-shadow:1px 1px 1px #fff;
+}
+
+.regUsuario{
+    width:520px; 
+    position:absolute;      
+    left:50%;
+    margin-left:-267px;
+    margin-top: 10px;
+}
+
+

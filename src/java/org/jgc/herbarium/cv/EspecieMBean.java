@@ -66,7 +66,7 @@ public class EspecieMBean {
     }
     
     public void eliminarEspecie() {    
-        System.out.println("Ingresa a eliminarFamilia()");
+        System.out.println("Ingresa a eliminarEspecie()");
         Especie temp = new Especie();
         String msg;
         temp = buscarId();
