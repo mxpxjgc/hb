@@ -44,9 +44,9 @@
                                 <h:outputText value="#{familiaItem.abreviatura}" />
                             </p:column>
                             <p:column style="width:10%;text-align: center">
-                                <h:outputLink value="/Herbarium/hb/pages/AdministrarGenero.xhtml">
-                                    <h:outputText value="G&eacute;neros"/>
-                                </h:outputLink>                         
+                                <p:commandButton id="btnIr" icon="ui-icon-extlink" title="Generos" action="#{familiaMBean.redirigir()}">
+                                    <f:setPropertyActionListener value="#{familiaItem}" target="#{familiaMBean.familia}" />
+                                </p:commandButton>                         
                             </p:column>
                             <p:column style="width:6%;text-align: center">
                                 <p:commandButton id="btnEdit" update=":formEdit" oncomplete="PF('dlgEdit').show();" 

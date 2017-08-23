@@ -11,6 +11,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
+import javax.servlet.http.HttpSession;
 import org.jgc.herbarium.be.Familia;
 import org.jgc.herbarium.be.Genero;
 import org.jgc.herbarium.bl.GeneroBL;
@@ -97,7 +98,13 @@ public class GeneroMBean {
 
     @PostConstruct
     public void listarGenero() {
-        setListaGenero(generoBL.listar(""));
+        //setListaGenero(generoBL.listar(""));
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        if(httpSession.getAttribute("idFamilia") != null){
+            setListaGenero(generoBL.listarxIDFamilia(Long.parseLong(httpSession.getAttribute("idFamilia").toString())));
+        }else{
+            setListaGenero(generoBL.listar(""));
+        }  
     }
 
     public GeneroBL getGeneroBL() {

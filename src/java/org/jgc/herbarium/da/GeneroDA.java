@@ -31,7 +31,7 @@ public class GeneroDA extends AbstractDA<Genero>{
 
     @Override
     public List<Genero> listar(String ref) {
-        return list("from Genero g left join fetch g.familia");
+        return list(ref);
     }
 
     @Override
@@ -52,6 +52,11 @@ public class GeneroDA extends AbstractDA<Genero>{
     @Override
     public long id() {
         return maxId(Genero.class);
+    }
+
+    public List<Genero> listarxIDFamilia(long id) {
+        String hql = "from Genero a inner join fetch a.familia b where b.idfamilia=" + id;
+        return listar(hql);
     }
     
 }

@@ -71,5 +71,9 @@ public class GeneroBL extends AbstractBL<Genero>{
     public long id() {
         return maxId();
     }
+
+    public List<Genero> listarxIDFamilia(long id) {
+        return dao.listarxIDFamilia(id);
+    }
     
 }

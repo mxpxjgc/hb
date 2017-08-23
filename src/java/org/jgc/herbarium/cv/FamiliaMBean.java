@@ -10,13 +10,15 @@ import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.model.SelectItem;
+import javax.faces.view.ViewScoped;
+import javax.servlet.http.HttpSession;
 import org.jgc.herbarium.be.Familia;
 import org.jgc.herbarium.bl.FamiliaBL;
 import org.jgc.herbarium.util.Tarea;
 import static org.jgc.herbarium.util.Utilitario.setTareaEvento;
 
 @ManagedBean
-@RequestScoped
+@ViewScoped
 public class FamiliaMBean {
 
     @ManagedProperty(value = "#{familiaBL}")
@@ -75,6 +77,12 @@ public class FamiliaMBean {
             this.selectOneItemsFamilia.add(selectItem);
         }        
         return selectOneItemsFamilia;
+    }
+    
+    public String redirigir() {
+        HttpSession httpSession = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
+        httpSession.setAttribute("idFamilia", getFamilia().getIdfamilia());
+        return "AdministrarGenero";
     }
     
     public Familia buscarId(){
